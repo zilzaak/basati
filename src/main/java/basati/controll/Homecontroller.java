@@ -88,12 +88,13 @@ public class Homecontroller {
 		return mv;
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("/upadminmail")
 	
 	public ModelAndView updatemail(@RequestParam String email,@RequestParam String pass) {
 		ModelAndView mv = new ModelAndView("setting");
 Adminmail ad=mrr.findAll().get(0);
 ad.setEmail(email);ad.setPass(pass);
+mrr.save(ad);
             mv.addObject("up","successfully updated");
 		return mv;
 	}
