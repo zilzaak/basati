@@ -30,7 +30,7 @@ ${sms}
 <div style="margin:50px;text-align:center;padding:50px;background-color:darkseagreen;">
 <br/>
 <h4>update</h4>
-<form action="/update" method="post">
+<form action="/upadminmail" method="post">
 <input type="text" name="email" placeholder="email"   />
 <br/>
 <br/>
