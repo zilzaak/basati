@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>sell animal</title>
+<title>all result</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="<c:url value="/static/theme/bootstrap431.css" /> " rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -150,7 +150,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <div style="background-color:skyblue;color:darkslategrey;padding:10px;" align="center">
 <table border="1" align="center" >
 <tr ng-if="dps.length!=0">
-<th>subject</th>
+<th>subject code</th>
 <th>full mark</th>
 <th>marks obtained</th>
 <th>letter grade</th>

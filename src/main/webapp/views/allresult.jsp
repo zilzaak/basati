@@ -5,7 +5,7 @@
 <%@ page isELIgnored="false"  %>
 <!DOCTYPE html>
 <html>
-<title>marksheet</title>
+<title>all result</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="<c:url value="/static/theme/bootstrap431.css" /> " rel="stylesheet">
@@ -75,12 +75,20 @@ function eit() {
 	    var canvas_image_height = HTML_Height;
 	    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
 	    html2canvas($(".html-content")[0]).then(function (canvas) {
-	        var imgData = canvas.toDataURL("image/jpeg", 1.0);
-	        var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
-	        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+	    	   var ctx = canvas.getContext('2d');
+	    	   ctx.scale(2,4);
+	           ctx['imageSmoothingEnabled'] = false; /* standard */
+	           ctx['mozImageSmoothingEnabled'] = false; // Firefox 
+	           ctx['oImageSmoothingEnabled'] = false; // Opera /
+	           ctx['webkitImageSmoothingEnabled'] = false; // Safari /
+	           ctx['msImageSmoothingEnabled'] = false; // IE */
+	           ctx['imageSmoothingQuality'] = "high";
+	    	var imgData = canvas.toDataURL("image/png", 10.0);
+	        var pdf = new jsPDF('p', 'pt',[PDF_Width, PDF_Height]);
+	        pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
 	        for (var i = 1; i <= totalPDFPages; i++) { 
 	            pdf.addPage(PDF_Width, PDF_Height);
-	            pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+	            pdf.addImage(imgData, 'PNG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
 	        }
 	      
 	        var r=x+"-"+y+"-"+z+".pdf"; 
@@ -137,12 +145,13 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<br/>
 	<button onclick="eit();" ng-if="allres.length!=0" style="margin-left:35%;">download</button>
 	<br/><br/>
-	<div class="html-content" style="padding:50px;font">
+	<div class="html-content" style="padding:50px;text-align:center;">
 	
 
 	<table border="1" align="center" ng-if="allres.length!=0" style="font-size:1.3em;font-weight:500;">
 	
 	<tr>
+	<th>session</th>
 	<th>department</th>
 	<th>semester</th>
 	<th>name</th>
@@ -152,6 +161,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	</tr>
 	
 	<tr ng-repeat="x in allres">
+	<td>{{x.session}}</td>
 	<td>{{x.dept}}</td>
 	<td>{{x.semester}}</td>
 	<td>{{x.name}}</td>

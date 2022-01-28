@@ -67,7 +67,7 @@ $scope.substrecord=function(){
 	v.year=$scope.p.year; v.duration=$scope.p.duration;
 	v.pub=$scope.p.pub;  v.issue=$scope.p.issue;
 	
-if(v.studentname=="" || v.dept=="" || v.semester=="" || v.subcode==null || v.rollno==null || v.regno==null || v.year==null || v.duration=="" ||
+if(v.studentname=="" || v.dept=="" || v.semester=="" || v.subcode==null || v.rollno==null || v.regno==null ||
 	v.session=="" || v.fullmark<=0 || v.fullmark==null  	|| v.subname=="" || v.rollno<=0 || v.regno<=0 || v.subcode<=0){
 	x="yes";
 }
@@ -140,6 +140,74 @@ $scope.cleardept=function(){
 	
 	
 }
+
+
+$scope.chad={
+	"email":null,
+	"password":"",
+	"code":null
+		
+};
+
+
+
+$scope.getcode=function(){
+	
+	var cf="no";
+	
+	if($scope.chad.email==null ||  $scope.chad.email.indexOf("@gmail.com")==-1){
+		cf="yes";
+	}
+	
+	
+	if(cf=="no"){
+		$http({ 
+			method:"POST" , 
+			url:"${pageContext.request.contextPath}/getcode", 
+			data:angular.toJson($scope.chad),
+		    headers:{"Content-Type":"application/json"}	
+			
+		        }).then(function(response){
+		      
+		        if(response.data.code!="ok"){
+		        	alert(response.data.code);
+		        }	
+		        	
+		   	        	})
+		   	        	
+		   	       	   	}
+	
+	if(cf=="yes"){	
+		
+	alert('wrong email id');	
+		
+	}
+	
+	
+}
+
+
+
+
+$scope.subcod=function(){
+	
+	$http({ 
+		method:"POST" , 
+		url:"${pageContext.request.contextPath}/subcode", 
+		data:angular.toJson($scope.chad),
+	    headers:{"Content-Type":"application/json"}	
+		
+	        }).then(function(response){
+	      
+	     alert(response.data.code);
+  
+	        	})		
+		
+}
+
+
+
+
 
 $scope.clearres=function(){
 	
@@ -233,25 +301,91 @@ $http({
 
 $scope.marktime=function(){
 
-angular.forEach($scope.fdept,function(v,k){
+	if($scope.p2.dept!="any" || $scope.p2.session!="any" || $scope.p2.semester!="any"){
+	angular.forEach($scope.fdept,function(v,k){
 
-if(k!=0){
-v.fullmark=$scope.fdept[0].fullmark; 
-v.year=$scope.fdept[0].year;
-v.duration=$scope.fdept[0].duration;
-v.issue=$scope.fdept[0].issue;
-v.pub=$scope.fdept[0].pub;	
+		if(k!=0){
+		v.fullmark=$scope.fdept[0].fullmark; 
+		v.year=$scope.fdept[0].year;
+		v.duration=$scope.fdept[0].duration;
+		v.issue=$scope.fdept[0].issue;
+		v.pub=$scope.fdept[0].pub;	
+			
+		}
+
+			
+		})
+
+		$http({ 
+			method:"PUT" , 
+			url:"${pageContext.request.contextPath}/updatede", 
+			data:angular.toJson($scope.fdept[0]),
+		    headers:{"Content-Type":"application/json"}	
+			
+		        }).then(function(response){
+		      
+
+		        	})	
+		        	
+	}      	
+		      
+		        	if($scope.p2.dept=="any" || $scope.p2.session=="any" || $scope.p2.semester=="any"){
+		        		
+		        		alert("can not update or edit because you have not selected session , deparment and semester . please select");
+		        	}
+		        				        	
+		        	
+		        	
 	
 }
 
+ 
+		
 	
-})
+$scope.marktime2=function(){
+
+	if($scope.p2.dept!="any" && $scope.p2.session!="any" && $scope.p2.subcode!=null){
+		angular.forEach($scope.fdept,function(v,k){
+
+			if(k!=0){
+			v.fullmark=$scope.fdept[0].fullmark; 
+			v.subname=$scope.fdept[0].subname;
+			}
+
+				
+			})
+
+			$http({ 
+				method:"PUT" , 
+				url:"${pageContext.request.contextPath}/updatede2", 
+				data:angular.toJson($scope.fdept),
+			    headers:{"Content-Type":"application/json"}	
+				
+			        }).then(function(response){
+			      
+
+			        	})		
+		
+	}
+		
+	if($scope.p2.dept=="any" || $scope.p2.session=="any" || $scope.p2.subcode==null){
+		
+		alert("can not update full mark or subject name , first select session , deparment and subcode");
+	}
+		
+
+	
+   	
+	        	
+	        	
+		
+	}	
 
 
-	
-}	
-	
-	
+
+
+
+
 
 
 $scope.admin={"email":"","password":"","code":""};
@@ -429,7 +563,10 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         
           <a class="dropdown-item" data-toggle="modal" data-target="#myModal">change password</a>
+          <a class="dropdown-item" data-toggle="modal" data-target="#myemail">change email</a>
           </div>
+          
+          
        </li> 
        
        
@@ -452,16 +589,16 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 
 
 <div  style="margin-left:8%;background-color:brown;width:85%;display:none;font-size:0.80em;" id="1">
-
+<br/>
   <h5 style="color:white;text-align:center;">select subject</h5> 
 <table border="1" align="center" >
 <tr>
-<th>Department</th>
-<th>Semester</th>
-<th>subject code</th>
-<th>sub name</th>
-<th>total mark</th>
-<th>session</th>
+<th>Department*</th>
+<th>Semester*</th>
+<th>subject code*</th>
+<th>sub name*</th>
+<th>total mark*</th>
+<th>session*</th>
 </tr>
 <tr>
 <td><select  ng-model="p.dept" ng-options="c for c in khan2"></select></td>
@@ -472,7 +609,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <td><select  ng-model="p.session" ng-options="c for c in sch"></select></td>
 </tr>
 </table>
-
+<br/>
   <h5 style="color:white;text-align:center;">exam duration, year and others</h5> 
 <table border="1" align="center" >
 <tr>
@@ -492,13 +629,13 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 
 
 
-  <h5 style="color:white;text-align:center;">enter student's record related to the subject</h5> 
+  <h5 style="color:white;text-align:center;">enter student's record related to the subject code</h5> 
 <table border="1" align="center">
 <tr>
 <th>record no</th>
-<th>name</th>
-<th>roll no</th>
-<th>reg no</th>
+<th>name*</th>
+<th>roll no*</th>
+<th>reg no*</th>
 <th>delete</th>
 <th>add</th>
 </tr>
@@ -532,8 +669,8 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 </div>
 
 
-<div  style="margin-left:8%;background-color:brown;width:85%;display:none;font-size:0.80em;" id="2">
-<h2 style="text-align:center;color:white;background-color:black;padding:5px;">insert students mark</h2>
+<div  style="margin-left:8%;background-color:#DCDCDC;width:85%;display:none;font-size:0.80em;" id="2">
+<h4 style="text-align:center;color:black;padding:5px;">select 1. session , 2. dept , 3.semester,  4. subject code to insert mark</h4>
 <table border="1" align="center" >
 <tr>
 <th>session</th>
@@ -546,13 +683,21 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <td><select  ng-model="p2.dept" ng-options="c for c in khan2" ng-change="filtstudent()"></select></td>
 <td><select  ng-model="p2.semester" ng-options="d for d in khan1" ng-change="filtstudent()"></select></td>
 <td><input type="number"  ng-model="p2.subcode" ng-keyup="filtstudent()"  ng-change="filtstudent()" /></td>
+
 </tr>
 <tr>
 </tr>
 </table>
+<br/>
+<div align="center">
+subject name:-<input type="text" ng-model="fdept[0].subname" ng-change="marktime2()"  class="form-control" style="width:40%;" placeholder="subject name"  />
+</div>
 <br/><br/>
 
-<h4 style="text-align:center;color:white;background-color:black;padding:5px;">full mark and others</h4>
+<h4 style="text-align:center;color:black;padding:5px;">insert marks</h4>
+
+
+
 
 <table border="1" align="center" >
 <tr ng-if="fdept!=null">
@@ -563,9 +708,9 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <th>result issue date</th>
 </tr>
 
-<tr>
+<tr ng-if="fdept!=null">>
 <td>
-<input type="number" ng-model="fdept[0].fullmark" ng-change="marktime();"/>
+<input type="number" ng-model="fdept[0].fullmark" ng-change="marktime2();" />
 </td>
 <td>
 <input type="number" ng-model="fdept[0].year" ng-change="marktime();"/>
@@ -707,6 +852,56 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
   </div>
 </div>
 
+
+ <!-- The Modal -->
+<div class="modal" id="myemail">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">change email</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="text-align:center;">
+      
+      <script type="text/javascript">
+      function showsb(){
+    	  alert("okkkk");
+          document.getElementById("cd").style.display="block";  
+    	       }
+
+      </script>
+
+     
+      
+      <b>enter new email</b> <br/>
+      <input type="text" ng-model="chad.email" placeholder="enter email email"/> <br/> <br/>
+      <button   ng-click="getcode();" onclick="showsb();">submit</button>
+       
+      <div id="cd" style="display:none;">
+      <b>enetr code sent to your new email</b> <br/>
+      <input type="text" ng-model="chad.code"/> <br/>
+      <br/>
+      <button  ng-click="subcod();">submit</button>
+      </div> 
+       
+       
+       
+       
+       
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

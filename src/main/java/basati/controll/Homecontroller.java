@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -474,7 +475,68 @@ public String  logout() {
 return "index";
 }
 
+@PostMapping("/getcode")
 
+public ResponseEntity<Admin>  getcode(@RequestBody Admin ad,HttpSession session) {
+
+session.removeAttribute("user");
+session.removeAttribute("password");
+
+String code = getrandom();
+session.setAttribute("emcode",code);
+if(new Sendotp().sendotp(code, ad.getEmail(),"password recover code",mrr.findAll().get(0).getEmail(),
+	mrr.findAll().get(0).getPass())) {
+ad.setCode("ok");
+       }
+               else {
+    ad.setCode("sorry ,wrong email address");
+                     }
+
+return new ResponseEntity<Admin>(ad,HttpStatus.OK);
+}
+
+
+@PutMapping("/updatede")
+
+public ResponseEntity<Department> updatede(@RequestBody Department fdept) {
+	List<Department> lst = drr.findBySessionAndDeptAndSemester(fdept.getSession(), fdept.getDept(), fdept.getSemester());
+
+for(Department d : lst) {
+	d.setYear(fdept.getYear());
+	d.setDuration(fdept.getDuration());
+	d.setPub(fdept.getPub());
+	d.setIssue(fdept.getIssue());
+	
+}
+drr.saveAll(lst);
+
+return new ResponseEntity<Department>(fdept,HttpStatus.OK);
+}
+
+@PutMapping("/updatede2")
+
+public ResponseEntity<Department> updatede2(@RequestBody List<Department> fdept) {
+drr.saveAll(fdept);
+return new ResponseEntity<Department>(fdept.get(0),HttpStatus.OK);
+}
+
+@PostMapping("/subcode")
+
+public ResponseEntity<Admin> subcode(@RequestBody Admin ad,HttpSession session) {
+
+String ec=(String) session.getAttribute("emcode");
+if(ad.getCode().contentEquals(ec)) {
+	ad.setCode("successfully changed email");
+	Admin d =amr.findAll().get(0);
+	d.setEmail(ad.getEmail());
+	amr.save(d);
+	return new ResponseEntity<Admin>(ad,HttpStatus.OK);
+}
+
+ad.setCode("sorry code is wrong , try again");
+return new ResponseEntity<Admin>(ad,HttpStatus.OK);
+
+}
 
 
 

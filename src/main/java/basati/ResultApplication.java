@@ -11,6 +11,7 @@ public class ResultApplication {
 	public static void main(String[] args) {
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Dhaka"));
 		SpringApplication.run(ResultApplication.class, args);
+		
 	}
 
 }

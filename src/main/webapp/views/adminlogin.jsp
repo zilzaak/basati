@@ -5,6 +5,7 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<title>BASATI result site</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="<c:url value="/static/theme/bootstrap431.css" /> " rel="stylesheet">
@@ -505,7 +506,7 @@ text-align:center;
 
 <!--  admin login form   -->
 
-<div class="container">
+<div class="container" style="margin-left:15%;">
 <div class="form-group" id="admin">
 <form action="/login" method="post" id="k">
        
@@ -637,7 +638,7 @@ text-align:center;
 
 <br/>
 <br/>
-<div style="background-color:lightcyan;text-align:center;width:50%;padding:20px;margin-left:17%;" ailgn="center" >
+<div style="background-color:lightcyan;text-align:center;width:50%;padding:20px;margin-left:23%;" ailgn="center" >
 
 <a href="${pageContext.request.contextPath}/studentresult" class="btn btn-success">get result</a>
 
