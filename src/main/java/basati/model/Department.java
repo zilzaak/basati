@@ -108,6 +108,7 @@ private String session;
 private String studentname;
 private String rollno;
 private float tc;
+private float credit;
 private float  pc;
 private float tf;
 private float pf;
@@ -132,7 +133,7 @@ public void setRegno(String regno) {
 
 public Department(String dept, String semester, String subname, String subcode, String session, String studentname,
 		String rollno, float tc, float pc, float tf, float pf, float total, float fullmark, String stringdate,
-		String grade, float gradepoint, String regno, String duration, int year, String pub, String issue, Date date) {
+		String grade, float gradepoint, String regno, String duration, int year, String pub, String issue, Date date,float credit) {
 	super();
 	this.dept = dept;
 	this.semester = semester;
@@ -156,6 +157,14 @@ public Department(String dept, String semester, String subname, String subcode, 
 	this.pub = pub;
 	this.issue = issue;
 	this.date = date;
+	this.credit=credit;
+}
+
+public float getCredit() {
+	return credit;
+}
+public void setCredit(float credit) {
+	this.credit = credit;
 }
 public String getGrade() {
 	return grade;
