@@ -208,9 +208,7 @@ if($scope.confirm==$scope.reg.password)	{
 				        
 				        
 				        
-				        
-				        
-		}
+				      					}
 		
 		
 	
@@ -506,22 +504,29 @@ text-align:center;
 
 <!--  admin login form   -->
 
-<div class="container" style="margin-left:15%;">
+<div class="container" align="center">
+
+
 <div class="form-group" id="admin">
 <form action="/login" method="post" id="k">
-       
-                         <br/>
-          <span style="color:red;font-size:0.85em" >${sms}</span>   
+     <br/>
+     <span style="color:red;font-size:0.85em" >${sms}</span>   
           <br/>            
-    <input type="text" class="form-control form-control-sm" name="user" placeholder="email">
+    <input type="text" class="form-control form-control-sm" name="user" placeholder="email" />
    <br/>
-    <input id="myInput" type="password" class="form-control form-control-sm" name="password" placeholder="password"><span><input type="checkbox" onclick="myFunction()">Show</span>
-    <br/>
+    <span>
+       <input id="myInput" type="password" class="form-control form-control-sm" name="password" placeholder="password" />
+       
+ <input type="checkbox" onclick="myFunction()">Show</span>
+   
+    
     <div class="forgotgrid"> 
     <div>
       <button type="submit" class="btn btn-success btn-sm">submit</button> 
     </div>
-   <div style="color:red;text-align:right;" id="forgothover"><b data-toggle="modal" data-target="#forgotmodal">forgot password??</b></div>
+   <div style="color:red;text-align:right;" id="forgothover"><b data-toggle="modal" data-target="#forgotmodal">
+   forgot password??</b>
+   </div>
     </div>
  </form>
 </div>
