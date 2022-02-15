@@ -372,8 +372,8 @@ if(b.getDept().contentEquals(p.getDept()) && b.getSemester().contentEquals(p.get
 	public ResponseEntity<Helperr> findresult(@RequestBody Department dp,HttpSession session){
 
 List<Department> lst = drr.findByDeptAndSemesterAndRollno(dp.getDept(),dp.getSemester(),dp.getRollno());
-float size=lst.size();
-float sum=0;
+
+float totalpoint=0;float totalcredit=0;
 float gpa=0; 
 DecimalFormat dfrmt = new DecimalFormat();
 dfrmt.setMaximumFractionDigits(2);
@@ -401,8 +401,8 @@ if(!lst.isEmpty()) {
 if(d.getGrade().contentEquals("F")) {
 	p=true;
 }
-    	sum=sum+d.getGradepoint();
-    	
+    totalpoint=totalpoint+d.getGradepoint()*d.getCredit();
+    	totalcredit=totalcredit+d.getCredit();
     }
     
     
@@ -417,7 +417,7 @@ rs.setSms("the student failed");
 }
       
 if(!p) {
-gpa=sum/size; 
+gpa=totalpoint/totalcredit; 
 gpa=Float.parseFloat(dfrmt.format(gpa));
 String serial="12345678";
 
