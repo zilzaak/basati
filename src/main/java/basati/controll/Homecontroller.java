@@ -296,7 +296,7 @@ return new ResponseEntity<Admin>(forgot,HttpStatus.OK);
 public Resultst findresult( Department dp){
 
 List<Department> lst = drr.findByDeptAndSemesterAndRollno(dp.getDept(),dp.getSemester(),dp.getRollno());
-float size=lst.size();
+float totalcredit=0;
 float sum=0;
 float gpa=0; 
 DecimalFormat dfrmt = new DecimalFormat();
@@ -326,8 +326,8 @@ if(!lst.isEmpty()) {
 if(d.getGrade().contentEquals("F")) {
 	p=true;
 }
-    	sum=sum+d.getGradepoint();
-    	
+    	sum=sum+d.getGradepoint()*d.getCredit();
+    	totalcredit=totalcredit+d.getCredit();
     }
     
     
@@ -342,7 +342,7 @@ rs.setSms("the student failed");
 }
       
 if(!p) {
-gpa=sum/size; 
+gpa=sum/totalcredit; 
 gpa=Float.parseFloat(dfrmt.format(gpa));
 String serial="12345678";
 
@@ -500,7 +500,7 @@ return new ResponseEntity<Admin>(ad,HttpStatus.OK);
 @PutMapping("/updatede")
 
 public ResponseEntity<Department> updatede(@RequestBody Department fdept) {
-	List<Department> lst = drr.findBySessionAndDeptAndSemester(fdept.getSession(), fdept.getDept(), fdept.getSemester());
+	List<Department> lst = drr.findBySessionAndDeptAndSemester(fdept.getSession(), fdept.getDept(),fdept.getSemester());
 
 for(Department d : lst) {
 	d.setYear(fdept.getYear());
