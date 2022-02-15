@@ -22,13 +22,13 @@ $scope.sch=["2010-11","2011-12","2012-13",'2013-14','2014-15','2015-16','2016-17
 	
 $scope.khan1=['1st','2nd','3rd','4th','5th','6th','7th','8th',"any"];
 $scope.khan2=['66 - Computer Technology','64 - Civil Technology','67 - Electrical Technology',"any"];
-$scope.p={"dept":"","semester":"","session":"","subcode":null,"subname":"","fullmark":null};
+$scope.p={"credit":null,"dept":"","semester":"","session":"","subcode":null,"subname":"","fullmark":null};
 $scope.p2={"dept":"any","semester":"any","session":"any","subcode":null};
 $scope.p3={"dept":"","semester":"","rollno":""};
 $scope.strecord=[];
-var r1={"dept":"","semester":"","session":"","subcode":null,"studentname":"","rollno":null,"regno":null,"subname":"","duration":"","year":null,"pub":"","issue":""};
-var r2={"dept":"","semester":"","session":"","subcode":null,"studentname":"","rollno":null,"regno":null,"subname":"","duration":"","year":null, "pub":"","issue":""};
-var r3={"dept":"","semester":"","session":"","subcode":null,"studentname":"","rollno":null,"regno":null,"subname":"","duration":"","year":null,"pub":"","issue":""};
+var r1={"credit":null,"dept":"","semester":"","session":"","subcode":null,"studentname":"","rollno":null,"regno":null,"subname":"","duration":"","year":null,"pub":"","issue":""};
+var r2={"credit":null,"dept":"","semester":"","session":"","subcode":null,"studentname":"","rollno":null,"regno":null,"subname":"","duration":"","year":null, "pub":"","issue":""};
+var r3={"credit":null,"dept":"","semester":"","session":"","subcode":null,"studentname":"","rollno":null,"regno":null,"subname":"","duration":"","year":null,"pub":"","issue":""};
 
 $scope.strecord.push(r1);
 $scope.strecord.push(r2);
@@ -44,7 +44,7 @@ $scope.clearstfilter=function(){
 
 
 $scope.addst=function(i){
-	var r={"dept":"","semester":"","session":"","subcode":null,"studentname":"","rollno":null,"regno":null,"subname":"","duration":"","year":null,"pub":"","issue":""};
+	var r={"credit":null,"dept":"","semester":"","session":"","subcode":null,"studentname":"","rollno":null,"regno":null,"subname":"","duration":"","year":null,"pub":"","issue":""};
 	$scope.strecord.splice(i, 0, r);
 }
 
@@ -58,6 +58,7 @@ $scope.removest=function(i){
 $scope.substrecord=function(){
 		var x="no";
 	angular.forEach($scope.strecord,function(v,k){
+		v.credit=$scope.p.credit;
 		v.dept=$scope.p.dept;
 		v.semester=$scope.p.semester;
 		v.session=$scope.p.session;
@@ -67,7 +68,7 @@ $scope.substrecord=function(){
 	v.year=$scope.p.year; v.duration=$scope.p.duration;
 	v.pub=$scope.p.pub;  v.issue=$scope.p.issue;
 	
-if(v.studentname=="" || v.dept=="" || v.semester=="" || v.subcode==null || v.rollno==null || v.regno==null ||
+if(v.studentname=="" || v.dept=="" || v.semester=="" || v.subcode==null || v.rollno==null || v.regno==null || v.credit==null ||
 	v.session=="" || v.fullmark<=0 || v.fullmark==null  	|| v.subname=="" || v.rollno<=0 || v.regno<=0 || v.subcode<=0){
 	x="yes";
 }
@@ -283,7 +284,9 @@ $http({
         }
         
         if(response.data.dept=="successfull"){
-        	alert("successfully deleted student record");
+     /*
+     successfully deleted the mark record
+     */
         	$scope.fdept.splice(i,1);
         }
 
@@ -350,6 +353,7 @@ $scope.marktime2=function(){
 			if(k!=0){
 			v.fullmark=$scope.fdept[0].fullmark; 
 			v.subname=$scope.fdept[0].subname;
+			v.credit=$scope.fdept[0].credit;
 			}
 
 				
@@ -593,20 +597,22 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
   <h5 style="color:white;text-align:center;">select subject</h5> 
 <table border="1" align="center" >
 <tr>
+<th>session*</th>
 <th>Department*</th>
 <th>Semester*</th>
 <th>subject code*</th>
 <th>sub name*</th>
 <th>total mark*</th>
-<th>session*</th>
+<th>credit*</th>
 </tr>
 <tr>
+<td><select  ng-model="p.session" ng-options="c for c in sch"></select></td>
 <td><select  ng-model="p.dept" ng-options="c for c in khan2"></select></td>
 <td><select  ng-model="p.semester" ng-options="d for d in khan1"></select></td>
 <td><input type="number" style="width:100px;"  ng-model="p.subcode"/></td>
 <td><input type="text"  ng-model="p.subname"/></td>
 <td><input type="number"  style="width:70px;"  ng-model="p.fullmark"/></td>
-<td><select  ng-model="p.session" ng-options="c for c in sch"></select></td>
+<td><input type="number"  style="width:70px;"  ng-model="p.credit"/></td>
 </tr>
 </table>
 <br/>
@@ -690,7 +696,9 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 </table>
 <br/>
 <div align="center">
-subject name:-<input type="text" ng-model="fdept[0].subname" ng-change="marktime2()"  class="form-control" style="width:40%;" placeholder="subject name"  />
+subject name<input type="text" ng-model="fdept[0].subname" ng-change="marktime2()"  class="form-control" style="width:40%;" placeholder="subject name"  />
+<br/>
+subject credit:-<input type="number" ng-model="fdept[0].credit" ng-change="marktime2()" />
 </div>
 <br/><br/>
 
@@ -745,7 +753,7 @@ subject name:-<input type="text" ng-model="fdept[0].subname" ng-change="marktime
 <th>record no</th>
 <th>Dept & other</th>
 <th>student info</th>
-<th>SET MARK</th>
+<th>Set MarkK</th>
 <th>grade</th>
 <th>task</th>
 <th>delete</th>
