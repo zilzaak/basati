@@ -52,7 +52,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	  %>
 	  
 
-<div  class="html-content" style="margin-left:.30%;margin-right:20%;background-color:floaralwhite;border:2px solid black;">
+<div  class="html-content" style="margin-left:2%;background-color:floaralwhite;border:2px solid black;">
 
 <div style="border:3px solid black;padding:4px;">
 <div style="border:6px solid blue;">
@@ -69,7 +69,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <div class="col-md-11" style="text-align:left;"> 
 <b style="font-size:1.8em;margin-left:22px;color:darkblue;font-family:monotype corsiva;">BADIUL ALAM SCIENCE AND TECHNOLOGY INSTITUTE</b> <br/>
 <b style="font-size:1.6em;margin-left:255px;color:darkblue;font-weight:200px;font-family:monotype corsiva;">Kasba , Brahmanbaria</b> <br/>
-<b style="font-size:1.6em;margin-left:300px;color:darkblue;font-weight:200px;font-family:monotype corsiva;">Estd. : 2010</b>
+ <b style="font-size:1.6em;margin-left:300px;color:darkblue;font-weight:200px;font-family:monotype corsiva;">Estd. : 2010</b>
 </div>
 </div>
 </li>
@@ -173,7 +173,6 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 
 <br/>
 <br/>
-<br/>
 
 <div style="height:400px;margin-left:5%;margin-right:4%;font-size:1.2em;">
 <table  align="center" border="1" style="width:100%;" >
@@ -204,7 +203,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 
 
 
- <div class="row" style="margin-top:120px;padding-left:30px;">
+ <div class="row" style="margin-top:100px;padding-left:30px;">
       <div class="col-md-4">
         <b>....................</b><br/>
     <b>Dept. Head</b>
