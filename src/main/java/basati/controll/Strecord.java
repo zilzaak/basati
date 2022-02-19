@@ -497,16 +497,13 @@ session.setAttribute("helper", hp);
 	
 	@DeleteMapping("/deldepartment")
 	
-	public ResponseEntity<Department>  delmark(@RequestBody Department dp,HttpSession session) {
-		String pass=(String) session.getAttribute("password");
-	if(dp.getDept().contentEquals(pass)) {
+	public ResponseEntity<Department>  delmark(@RequestBody Department dp) {
+		
 		Department d=drr.findById(dp.getDid()).get();
 		drr.delete(d);
-		dp.setDept("successfull");
-		return new ResponseEntity<Department>(dp,HttpStatus.OK);
-	}
-	dp.setDept("fail");
-	return new ResponseEntity<Department>(dp,HttpStatus.OK);
+	       return new ResponseEntity<Department>(dp,HttpStatus.OK);
+	
+	
 	}	
 	
 	
