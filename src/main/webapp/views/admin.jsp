@@ -267,8 +267,6 @@ $scope.deletemark=function(i){
 	
 	if(person){
 		
-var pass=window.prompt("enter password to delete");
-$scope.fdept[i].dept=pass;
 $http({ 
 	method:"DELETE" , 
 	url:"${pageContext.request.contextPath}/deldepartment", 
@@ -277,27 +275,15 @@ $http({
 	
         }).then(function(response){
       
-        if(response.data.dept=="fail"){
-        	
-        	alert("password is wrong");
-        	$scope.fdept[i].dept=dept;
-        }
-        
-        if(response.data.dept=="successfull"){
-     /*
-     successfully deleted the mark record
-     */
+
         	$scope.fdept.splice(i,1);
-        }
+        
 
         	})	
 	
 		}
 	
-	if(!person){
-		
-		alert("dont delete");
-	}
+
 	
 }
 
