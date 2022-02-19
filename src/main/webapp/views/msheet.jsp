@@ -15,7 +15,10 @@
 <script src="<c:url value="/static/theme/popper114.js" />" > </script>
 <script src="<c:url value="/static/theme/angular1.8.2.js" />" > </script>
 <script src="<c:url value="/static/theme/bootstrap431.js" />" > </script>
-
+<link href="<c:url value="/static/theme/pregnant.css" /> " rel="stylesheet">
+<!--  
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>  -->
 
 <style>
 *{
@@ -28,7 +31,7 @@ box-sizing:border-box;
 .html-content{
 width:1000px; 
 font-weight:700;
-
+ 
 
 }
 
@@ -52,7 +55,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	  %>
 	  
 
-<div  class="html-content" style="margin-left:2%;background-color:floaralwhite;border:2px solid black;">
+<div  class="html-content" style="margin-left:2%;background-color:floaralwhite;border:2px solid black;" id="hc">
 
 <div style="border:3px solid black;padding:4px;">
 <div style="border:6px solid blue;">
