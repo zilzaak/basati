@@ -10,7 +10,7 @@ import basati.model.Department;
 
 public interface Departmentrepo extends JpaRepository<Department,Integer> {
 
-	public boolean existsByDeptAndSemesterAndRollnoAndSubcode(String x, String s, String r,String c);
+	public boolean existsBySessionAndDeptAndSemesterAndRollnoAndSubcode(String ss,String x, String s, String r,String c);
 	
 	public List<Department> findByDeptAndSemesterAndSubcodeOrderByRollnoAsc(String x, String s,String c);
 	public List<Department> findByDeptAndSemesterAndRollno(String dept, String semester, String rollno);
