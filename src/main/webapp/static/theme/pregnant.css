@@ -1,8 +1,9 @@
-
-
-
-body{
+#hc{
 	
-	background-image:url("jungle.jpeg");
-	background-size:1000px 800px;
+	background-image:url("basati.jpg");
+	background-size:440px 600px;
+	 background-repeat: no-repeat;
+	   background-position:center;
+	   background-filter:blur(70px);
+	
 }
