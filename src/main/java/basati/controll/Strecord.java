@@ -45,12 +45,12 @@ private Serialmakerepo srr;
 		String sms="";
 		
 		for(Department d : record) {		
-	if(drr.existsByDeptAndSemesterAndRollnoAndSubcode(d.getDept(),d.getSemester(),d.getRollno(),d.getSubcode())) {
+	if(drr.existsBySessionAndDeptAndSemesterAndRollnoAndSubcode(d.getSession(),d.getDept(),d.getSemester(),d.getRollno(),d.getSubcode())) {
 			int g =record.indexOf(d)+1;
 			sms=sms+",record no "+g+",";
 			
 		}
-	if(!drr.existsByDeptAndSemesterAndRollnoAndSubcode(d.getDept(),d.getSemester(),d.getRollno(),d.getSubcode())) {
+	if(!drr.existsBySessionAndDeptAndSemesterAndRollnoAndSubcode(d.getSession(),d.getDept(),d.getSemester(),d.getRollno(),d.getSubcode())) {
 		drr.save(d);
 		
 	}
