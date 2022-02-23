@@ -18,7 +18,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script type="text/javascript">
-var x="";var y="";var z="";
+
 var module=angular.module("arapp",[]);
 module.controller("ar",function($scope,$http){
 	
@@ -44,10 +44,7 @@ module.controller("ar",function($scope,$http){
 		        }).then(function(response){
 		        	
 		        	$scope.allres=response.data;
-		    x=$scope.allres[0].session;
-		    	
-		    y=$scope.allres[0].dept;
-		    z=$scope.allres[0].semester;     	
+    	document.getElementById("sh").style.display="none";
 	 
 		        	})	
 		
@@ -63,46 +60,16 @@ module.controller("ar",function($scope,$http){
 
 
 
-function eit() {
 	
-	 var HTML_Width = $(".html-content").width();
-	    var HTML_Height = $(".html-content").height();
-	    var top_left_margin =3;
-	    var PDF_Width = HTML_Width+(top_left_margin *2);
-	    
-	    var PDF_Height =(PDF_Width * 1.5) + (top_left_margin * 2);
-	    var canvas_image_width = HTML_Width;
-	    var canvas_image_height = HTML_Height;
-	    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-	    html2canvas($(".html-content")[0]).then(function (canvas) {
-	    	   var ctx = canvas.getContext('2d');
-	    	   ctx.scale(2,4);
-	           ctx['imageSmoothingEnabled'] = false; /* standard */
-	           ctx['mozImageSmoothingEnabled'] = false; // Firefox 
-	           ctx['oImageSmoothingEnabled'] = false; // Opera /
-	           ctx['webkitImageSmoothingEnabled'] = false; // Safari /
-	           ctx['msImageSmoothingEnabled'] = false; // IE */
-	           ctx['imageSmoothingQuality'] = "high";
-	    	var imgData = canvas.toDataURL("image/png", 10.0);
-	        var pdf = new jsPDF('p', 'pt',[PDF_Width, PDF_Height]);
-	        pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
-	        for (var i = 1; i <= totalPDFPages; i++) { 
-	            pdf.addPage(PDF_Width, PDF_Height);
-	            pdf.addImage(imgData, 'PNG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
-	        }
-	      
-	        var r=x+"-"+y+"-"+z+".pdf"; 
-	        
-	       pdf.save(r);
-	      
-	    }); 
-	}
-
 </script>
 
 
 
-
+<style>
+table th,td{
+padding:8px;
+}
+</style>
 
 
 
@@ -115,12 +82,13 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	}
 	  %>
 	   
-	  
-	<div class="container" style="background-color:ghostwhite;margin:50px;" align="center">
-	<br/>
-	<table border="1" align="center" >
+	   
+
+	<div class="container" style="background-color:ghostwhite;margin:50px;margin-left:30px;border:2px solid black;" align="center">
 	
-	<tr>
+	<div id="sh">
+	<table border="1" align="center" >
+		<tr>
 	<th>session</th>
 	<th>department</th>
 	<th>semseter</th>
@@ -134,36 +102,33 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	</tr>
 	
 	</table>
-	
-	<br/>
-	<button ng-click="getall();" class="btn btn-sm btn-success" style="margin-left:35%;">submit</button>
-	
-	<br/>
-	
-	
+		<br/>
 
+	<button ng-click="getall();" class="btn btn-sm btn-success" style="margin-left:35%;">submit</button>
+	</div>
 	<br/>
-	<button onclick="eit();" ng-if="allres.length!=0" style="margin-left:35%;">download</button>
-	<br/><br/>
+	<br/>
+	<h4>Badiul Alam Science And Technology Institute</h4>
+	<h4>Kasba , Brahmanbaria</h4>
+	<h4>Result of {{p.semester}} Semester , Session-{{p.session}}</h4>
+	<h4>Technology : {{p.dept}}</h4>
+
+
 	<div class="html-content" style="padding:50px;text-align:center;">
 	
 
 	<table border="1" align="center" ng-if="allres.length!=0" style="font-size:1.3em;font-weight:500;">
 	
 	<tr>
-	<th>session</th>
-	<th>department</th>
-	<th>semester</th>
-	<th>name</th>
-	<th>roll no</th>
-	<th>reg no</th>
+	<th>SL NO</th>
+	<th>STUDENT NAME</th>
+	<th>ROLL NO</th>
+	<th>REG NO</th>
 	<th>GPA</th>
 	</tr>
 	
 	<tr ng-repeat="x in allres">
-	<td>{{x.session}}</td>
-	<td>{{x.dept}}</td>
-	<td>{{x.semester}}</td>
+	<td>{{$index+1}}
 	<td>{{x.name}}</td>
 	<td>{{x.roll}}</td>
 	<td>{{x.regno}}</td>
@@ -171,14 +136,29 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	</tr>
 	
 	</table>
-<br/>
-<br/>
+
+
 	</div>	
 	
 	
+<div class="row">
+<div class="col">
+<b>.....................</b>
+<br/>
+Prepared By
+</div>
+<div class="col">
+<b>....................</b><br/>
+Head of the dept
+</div>
+<div class="col">
+<b>...............</b><br/>
+Principal
+</div>
+</div>	
 	
-	
-	
+<br/>
+<br/>	
 	
 	
 	
