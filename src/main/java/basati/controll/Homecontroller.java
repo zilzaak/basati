@@ -66,7 +66,13 @@ public class Homecontroller {
 		return "adminset";
 	}
 	
+		@RequestMapping("/allresult2")
 	
+	public String allresult2() {
+	
+		return "allresult2";
+		
+	}
 	@PostMapping("/addmail")
 	
 	public ModelAndView addmail(@RequestParam String email,@RequestParam String pass) {
