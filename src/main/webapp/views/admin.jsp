@@ -230,6 +230,7 @@ $scope.clearres=function(){
 
 $scope.getgpa=function(i){
 	
+	
 	$http({ 
 		method:"POST" , 
 		url:"${pageContext.request.contextPath}/makegpa", 
@@ -238,12 +239,30 @@ $scope.getgpa=function(i){
 		
 	        }).then(function(response){
 	        	
-	        	$scope.fdept[i]=response.data;
-  
+	     if(response.data.studentname!=""){
+	    	 alert(response.data.studentname);
+	     }
+	     if(response.data.studentname==""){
+	    	
+	    		$http({ 
+	    			method:"POST" , 
+	    			url:"${pageContext.request.contextPath}/filtstudent", 
+	    			data:angular.toJson($scope.p2),
+	    		    headers:{"Content-Type":"application/json"}	
+	    			
+	    		        }).then(function(response){
+	    		      
+	    		        	$scope.fdept=response.data;
+	    		        	 alert("successfully updated");
+	    		        	})
+	     }
 	        	})	
 	        	
+	     	
 	        	
 }
+
+
 $scope.submark=function(){
 	var dept=$scope.fdept[0].dept;
 	$http({ 
@@ -802,7 +821,7 @@ subject credit:-<input type="number" ng-model="fdept[0].credit" ng-change="markt
 {{x.total}}
 </td>
 <td>
-<button ng-click="getgpa($index)">submit</button>
+<button ng-click="getgpa($index)">update</button>
 </td>
 <td><button ng-click="deletemark($index);" class="btn btn-danger btn-sm">delete</button></td>
 </tr>
