@@ -144,9 +144,58 @@ private Serialmakerepo srr;
 	
 	@PostMapping("/makegpa")
 	public ResponseEntity<Department> makegpa(@RequestBody Department dp) throws ParseException{
+		
+		String sms="";
 		Department chng=null;
 	  chng=drr.findById(dp.getDid()).get();
-		if(chng!=dp || chng==null) {
+	  
+	  
+	  if(!dp.getStudentname().contentEquals(chng.getStudentname())) {
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno());
+		for(Department dk : lst) {
+			dk.setStudentname(dp.getStudentname());
+		drr.save(dk);
+			System.out.println("updating student name for name:"+dk.getStudentname());
+		}
+		  }
+	  
+	  
+	  if(!dp.getRollno().contentEquals(chng.getRollno())) {
+		  	if(!drr.existsBySessionAndDeptAndSemesterAndRollno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRollno())) {
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno());
+		for(Department dk : lst) {
+		dk.setRollno(dp.getRollno());
+		   drr.save(dk);
+			System.out.println("updating the roll no for name:"+dk.getStudentname());
+		}
+		}
+		else {
+			sms=sms+" duplicate roll no , can not update , ";
+			System.out.println("sorry duplicate roll no found");
+		}
+		
+		  
+	  }
+	 
+	  if(!dp.getRegno().contentEquals(chng.getRegno())) {
+		  
+		  
+		if(!drr.existsBySessionAndDeptAndSemesterAndRegno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRegno())) {
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRegno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRegno());
+		for(Department dk : lst) {
+			dk.setRegno(dp.getRegno());
+			drr.save(dk);
+			System.out.println("updating the reg no for name:"+dk.getStudentname());
+				}
+		}
+		else {
+			sms=sms+" duplicate reg no , can not update , ";
+		}
+		
+
+			  }
+	   
+	 		if(chng!=dp || chng==null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			Date dt = new Date();
 			dp.setStringdate(sdf.format(dt));
@@ -166,6 +215,7 @@ private Serialmakerepo srr;
 			dp.setGradepoint((float) 4.00);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
+			dp.setStudentname(sms);
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
@@ -174,6 +224,7 @@ private Serialmakerepo srr;
 			dp.setGradepoint((float) 3.75);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
+			dp.setStudentname(sms);
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
@@ -182,6 +233,7 @@ private Serialmakerepo srr;
 			dp.setGradepoint((float) 3.50);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
+			dp.setStudentname(sms);
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		if(65<=mark && mark<70) {
@@ -189,6 +241,7 @@ private Serialmakerepo srr;
 			dp.setGradepoint((float) 3.25);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
+			dp.setStudentname(sms);
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		if(60<=mark && mark<65) {
@@ -196,6 +249,7 @@ private Serialmakerepo srr;
 			dp.setGradepoint((float) 3.00);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
+			dp.setStudentname(sms);
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		if(55<=mark && mark<60) {
@@ -203,6 +257,7 @@ private Serialmakerepo srr;
 			dp.setGradepoint((float) 2.75);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
+			dp.setStudentname(sms);
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		if(50<=mark && mark<55) {
@@ -210,6 +265,7 @@ private Serialmakerepo srr;
 			dp.setGradepoint((float) 2.50);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
+			dp.setStudentname(sms);
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		if(45<=mark && mark<50) {
@@ -217,6 +273,7 @@ private Serialmakerepo srr;
 			dp.setGradepoint((float) 2.25);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
+			dp.setStudentname(sms);
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
@@ -225,6 +282,7 @@ private Serialmakerepo srr;
 			dp.setGradepoint((float) 2.00);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
+			dp.setStudentname(sms);
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
@@ -233,10 +291,13 @@ private Serialmakerepo srr;
 			dp.setGradepoint((float) 0.0);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
+			dp.setStudentname(sms);
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
-	}
+	} 
+			
+			dp.setStudentname(sms);
 		return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		
 	}	
@@ -499,10 +560,11 @@ session.setAttribute("helper", hp);
 	
 	public ResponseEntity<Department>  delmark(@RequestBody Department dp) {
 		
+	
 		Department d=drr.findById(dp.getDid()).get();
 		drr.delete(d);
-	       return new ResponseEntity<Department>(dp,HttpStatus.OK);
-	
+		dp.setDept("successfull");
+		return new ResponseEntity<Department>(dp,HttpStatus.OK);
 	
 	}	
 	
