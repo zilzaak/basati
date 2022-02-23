@@ -33,4 +33,16 @@ public interface Departmentrepo extends JpaRepository<Department,Integer> {
 
 	public List<Department> findBySessionAndDeptAndSemester(String session, String dept, String semester);
 
+	public boolean existsBySessionAndDeptAndSemesterAndRollno(String session, String dept, String semester,
+			String rollno);
+
+	public List<Department> findBySessionAndDeptAndSemesterAndRollno(String session, String dept, String semester,
+			String rollno);
+
+	public List<Department> findBySessionAndDeptAndSemesterAndRegno(String session, String dept, String semester,
+			String regno);
+
+	public boolean existsBySessionAndDeptAndSemesterAndRegno(String session, String dept, String semester,
+			String regno);
+
 }
