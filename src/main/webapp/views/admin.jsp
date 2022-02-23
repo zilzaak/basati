@@ -560,7 +560,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
         
           <a class="dropdown-item" href="${pageContext.request.contextPath}/adminmark">result</a>
           <a class="dropdown-item" href="#" onclick="window.open('${pageContext.request.contextPath}/allresult')" >all result</a>
-          
+           <a class="dropdown-item" href="#" onclick="window.open('${pageContext.request.contextPath}/allresult2')" >Tabulation Sheet</a>
           </div>
        </li> 
        
