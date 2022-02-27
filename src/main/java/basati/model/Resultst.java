@@ -2,7 +2,7 @@ package basati.model;
 
 public class Resultst {
 
-	private int resultid;
+
 	private String dept;
 	private String roll;
 	private String semester;
@@ -12,12 +12,7 @@ public class Resultst {
 	private String sms;
 	private String name;
 	private float gpa;	
-	public int getResultid() {
-		return resultid;
-	}
-	public void setResultid(int resultid) {
-		this.resultid = resultid;
-	}
+
 	public String getDept() {
 		return dept;
 	}
