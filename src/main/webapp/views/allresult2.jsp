@@ -71,7 +71,8 @@ module.controller("ar",function($scope,$http){
 angular.forEach($scope.allr,function(v,k){
 	i=k+1;
 	if($scope.fi<=i && i<=$scope.ti ){
-		$scope.allres[i-1]=v;
+	
+		$scope.allres.push(v);
 	}
 })
 		
@@ -120,7 +121,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	  %>
 	   
 	 <div id="k"> 
-<div style="background-color:ghostwhite;margin-left:-350px;margin-top:50px;padding-left:15px;border:2px solid black;width:1550px;height:1200px;" >
+<div style="background-color:ghostwhite;margin-left:-350px;margin-top:173px;padding-left:15px;border:2px solid black;width:1750px;height:1200px;" >
 <br/>
 <div style="text-align:center;">
 <b>Bangldesh Technical Education Board , Dhaka</b> <br/>
@@ -141,7 +142,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 
 
 
-<table   border="1"   ng-if="allres.length!=0" style="font-weight:500;overflow-x:auto;width:1500px;font-size:0.50em;" >
+<table   border="1"   ng-if="allres.length!=0" style="font-weight:500;overflow-x:auto;width:1700px;font-size:0.50em;" >
 	<tr ng-repeat="x in allres">
 	<th ng-if="$index==0">--</th>
 	<th ng-if="$index==0">--</th>
@@ -298,16 +299,7 @@ leter grade
 	</tr>	
 	
 </table>
-
-
 	
-	
-
-<br/>
-<br/>
-
-	
-<br/>	
 	</div>  
 		<div>
 <div class="row">
@@ -385,10 +377,10 @@ Head of the Institute
 
 	<br/>
 <table border="1">
-<tr ng-if="allres.length>0">
+<tr ng-if="allr.length>0">
 <th>SL NO</th><th>subject name<th>tc</th><th>tf</th><th>pc</th><th>pf</th>
 </tr>
-<tr ng-if="allres.length>0" ng-repeat="x in allres[0].dps">
+<tr ng-if="allr.length>0" ng-repeat="x in allr[0].dps">
 <td>{{$index+1}}</td>
 <td>{{x.subname}}</td>
 <td ><input style="width:80px;" type="text" ng-model="sublist[$index].tc"/></td>
