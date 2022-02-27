@@ -303,11 +303,28 @@ private Serialmakerepo srr;
 	}	
 		
 	public List<Department> lst2 = new ArrayList<Department>();
+	
+	
 	@PostMapping("/submark")
 	public ResponseEntity<List<Department>> filtstudent(@RequestBody List<Department> lst) throws ParseException{
-lst2=lst;
+	lst2=lst;
 String sms="";
 		boolean x=false;
+		
+		for(Department dn : lst){
+		Department chng=null;
+	chng=drr.findById(dn.getDid()).get();
+	if(!chng.getRollno().contentEquals(dn.getRollno()) || !chng.getRegno().contentEquals(dn.getRegno()) || !chng.getStudentname().contentEquals(dn.getStudentname())) {
+sms=sms+" Sorry ,press update button for Name:"+dn.getStudentname()+", roll no: "+dn.getRollno()+",subject code:"+dn.getSubcode()+" ,";
+x=true;
+	}
+	}
+		
+	if(x) {
+		lst.get(0).setDept(sms);
+		return new  ResponseEntity<List<Department>>(lst,HttpStatus.OK);
+	}
+		
 		for(Department d : lst) {
 if(checkdub(d)) {
 	sms=sms+"record no::"+(lst.indexOf(d)+1)+",";
@@ -316,21 +333,34 @@ if(checkdub(d)) {
 			
 		}
 		
+		
+			
 		if(!x) {
 			for(Department d : lst) {
+				  Department chng=null;
+				 chng=drr.findById(d.getDid()).get();
+				if(chng!=d || chng==null) {
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+					Date dt = new Date();
+					d.setStringdate(sdf.format(dt));
+					Date d1=sdf.parse(d.getStringdate());
+					d.setDate(d1);	
+		        		}	
 				d=gpasubmitall(d);
 				drr.save(d);
-			}	
+
+		}
 			sms="successfully added record";
 			lst.get(0).setDept(sms);
 			return new  ResponseEntity<List<Department>>(lst,HttpStatus.OK);
+			
 		}
+		
 sms=sms+" these record has duplicate roll no for same student for same dept,semester and subject, make correction please";
 		lst.get(0).setDept(sms);
 		return new  ResponseEntity<List<Department>>(lst,HttpStatus.OK);
 		
-	}		
-	
+		}
 	
 	
 	public boolean checkdub(Department p) {
@@ -351,15 +381,7 @@ if(b.getDept().contentEquals(p.getDept()) && b.getSemester().contentEquals(p.get
 	
 
 	public Department gpasubmitall(Department dp) throws ParseException{
-		Department chng=null;
-		 chng=drr.findById(dp.getDid()).get();
-		if(chng!=dp || chng==null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			Date dt = new Date();
-			dp.setStringdate(sdf.format(dt));
-			Date d1=sdf.parse(dp.getStringdate());
-			dp.setDate(d1);
-		}
+
 
 		float obtain=dp.getPc()+dp.getPf()+dp.getTc()+dp.getTf();
 		dp.setTotal(obtain);
