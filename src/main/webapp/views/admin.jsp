@@ -228,13 +228,12 @@ $scope.clearres=function(){
 }
 
 
-$scope.getgpa=function(i){
-	
+$scope.getgpa=function(x){
 	
 	$http({ 
 		method:"POST" , 
 		url:"${pageContext.request.contextPath}/makegpa", 
-	  	data:angular.toJson($scope.fdept[i]),
+	  	data:angular.toJson(x),
 	    headers:{"Content-Type":"application/json"}	
 		
 	        }).then(function(response){
@@ -257,7 +256,7 @@ $scope.getgpa=function(i){
 	    		        	})
 	     }
 	        	})	
-	        	
+	      	
 	     	
 	        	
 }
@@ -280,8 +279,8 @@ $scope.submark=function(){
 		
 }	
 
-$scope.deletemark=function(i){
-	var dept=$scope.fdept[i].dept;
+$scope.deletemark=function(dept){
+	
 	var person = window.confirm("want to delete student mark record??");
 	
 	if(person){
@@ -289,21 +288,25 @@ $scope.deletemark=function(i){
 $http({ 
 	method:"DELETE" , 
 	url:"${pageContext.request.contextPath}/deldepartment", 
-	data:angular.toJson($scope.fdept[i]),
+	data:angular.toJson(dept),
     headers:{"Content-Type":"application/json"}	
 	
         }).then(function(response){
-      
-
-        	$scope.fdept.splice(i,1);
+    		$http({ 
+    			method:"POST" , 
+    			url:"${pageContext.request.contextPath}/filtstudent", 
+    			data:angular.toJson($scope.p2),
+    		    headers:{"Content-Type":"application/json"}	
+    			
+    		        }).then(function(response){
+    		      
+    		        	$scope.fdept=response.data;
+    		        	 
+    		        	})
+     })
         
-
-        	})	
-	
 		}
-	
-
-	
+		
 }
 
 
@@ -821,9 +824,9 @@ subject credit:-<input type="number" ng-model="fdept[0].credit" ng-change="markt
 {{x.total}}
 </td>
 <td>
-<button ng-click="getgpa($index)">update</button>
+<button ng-click="getgpa(x)">update</button>
 </td>
-<td><button ng-click="deletemark($index);" class="btn btn-danger btn-sm">delete</button></td>
+<td><button ng-click="deletemark(x);" class="btn btn-danger btn-sm">delete</button></td>
 </tr>
 </table>
 <br/>
