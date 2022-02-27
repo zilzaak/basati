@@ -5,18 +5,15 @@
 <%@ page isELIgnored="false"  %>
 <!DOCTYPE html>
 <html>
-<title>all result</title>
+<title>tabulation sheet</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="<c:url value="/static/theme/bootstrap431.css" /> " rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css
-" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 <script src="<c:url value="/static/theme/jquery340.js" />" > </script> 
 <script src="<c:url value="/static/theme/popper114.js" />" > </script>
 <script src="<c:url value="/static/theme/angular1.8.2.js" />" > </script>
 <script src="<c:url value="/static/theme/bootstrap431.js" />" > </script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script type="text/javascript">
 
 var module=angular.module("arapp",[]);
@@ -26,55 +23,95 @@ module.controller("ar",function($scope,$http){
 		'2021-22','2022-23','2023-24','2024-25','2025-26','2026-27','2027-28','2028-29','2029-30','2030-31','2031-32','2032-33','2033-34'];
 	
 	$scope.khan1=['1st','2nd','3rd','4th','5th','6th','7th','8th'];
+	$scope.sublist=[];
 
 	$scope.khan2=['66 - Computer Technology','64 - Civil Technology','67 - Electrical Technology',"any"];
 
 	$scope.p={"dept":"","semester":"","session":"","subcode":null,"subname":"","fullmark":null};
+	var m1={"tc":"","tf":"","pc":"","pf":""};
+	var m2={"tc":"","tf":"","pc":"","pf":""};
+	var m3={"tc":"","tf":"","pc":"","pf":""};
+	var m4={"tc":"","tf":"","pc":"","pf":""};
+	var m5={"tc":"","tf":"","pc":"","pf":""};
+	var m6={"tc":"","tf":"","pc":"","pf":""};
+	var m7={"tc":"","tf":"","pc":"","pf":""};
+	var m8={"tc":"","tf":"","pc":"","pf":""};
+	var m9={"tc":"","tf":"","pc":"","pf":""};
+	var m10={"tc":"","tf":"","pc":"","pf":""};
+	$scope.sublist.push(m1); $scope.sublist.push(m2);$scope.sublist.push(m3);$scope.sublist.push(m4);
+	$scope.sublist.push(m5); $scope.sublist.push(m6);$scope.sublist.push(m7);$scope.sublist.push(m8);
+	$scope.sublist.push(m9);$scope.sublist.push(m10);
+	$scope.fi=null;
+	$scope.ti=null;
+	$scope.tti=null;
 	
 	$scope.allres=[];
-	
+	$scope.allr=[];
 	$scope.getall=function(){
      
 		$http({ 
 			method:"POST" , 
-			url:"${pageContext.request.contextPath}/getallresult", 
+			url:"${pageContext.request.contextPath}/tabresult", 
 		  	data:angular.toJson($scope.p),
 		    headers:{"Content-Type":"application/json"}	
 			
 		        }).then(function(response){
 		        	
+		        	$scope.allr=response.data;
 		        	$scope.allres=response.data;
-    	document.getElementById("sh").style.display="none";
-	 
-		        	})	
+		        	$scope.tti=response.data.length;
+		        		        	})	
 		
 	
 	}
 	
+	$scope.limitshow=function(){
+		$scope.allres=[];
+		    
+angular.forEach($scope.allr,function(v,k){
+	i=k+1;
+	if($scope.fi<=i && i<=$scope.ti ){
+		$scope.allres[i-1]=v;
+	}
+})
+		
+	}	
 	
 	
+	
+	
+$scope.hidesh=function(){
+	document.getElementById("sh").style.display="none";
+}	
 	
 	
 });
-
-
-
-
 	
 </script>
 
 
 
 <style>
-table th,td{
-padding:8px;
+ #k{
+    transform: rotate(-90deg);
+    
+  }
+  
+  table th{
+wrap-word:break-word;
+
 }
+table td{
+wrap-word:break-word;
+
+}
+
 </style>
 
 
 
 </head>
-<body ng-controller="ar" ng-app="arapp" >
+<body ng-controller="ar" ng-app="arapp">
 
 <%
 if(session.getAttribute("user")==null && session.getAttribute("password")==null){
@@ -82,89 +119,286 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	}
 	  %>
 	   
-	   
+	 <div id="k"> 
+<div style="background-color:ghostwhite;margin-left:-350px;margin-top:50px;padding-left:15px;border:2px solid black;width:1550px;height:1200px;" >
+<br/>
+<div style="text-align:center;">
+<b>Bangldesh Technical Education Board , Dhaka</b> <br/>
+<b>Tabulation Sheet for Diploma-in-Engineering</b>
+</div>
 
-	<div class="container" style="background-color:ghostwhite;margin:50px;margin-left:30px;border:2px solid black;" align="center">
+<div class="row" align="center">
+<div class="col">{{allres[0].rst.dept}} <br/>
+<b>Institute Name: Badiul Alam Science and Technology Institute</b>
+</div>
+<div class="col">
+{{allres[0].rst.semester}} Semester Examination( {{allres[0].dps[0].duration}}) <br/>
+<b>Session: {{allres[0].rst.session}}</b>
+</div>
+</div>
+<br/>
+
+
+
+
+<table   border="1"   ng-if="allres.length!=0" style="font-weight:500;overflow-x:auto;width:1500px;font-size:0.50em;" >
+	<tr ng-repeat="x in allres">
+	<th ng-if="$index==0">--</th>
+	<th ng-if="$index==0">--</th>
+	<th ng-if="$index==0" style="width:81px;">Subject Name and code</th>
 	
-	<div id="sh">
+	<th ng-if="$index==0" style="padding-left:15px;padding-right:15px;" >
+	
+	<div class="row" style="height:27px;">
+	<div style="border:1px solid black;" class="col" ng-repeat=" dp in x.dps" >
+	{{dp.subname}}({{dp.subcode}}) 
+	</div>
+	</div>
+</th>
+
+	<th ng-if="$index==0">Result</th>
+	</tr>
+	
+	<tr ng-repeat="x in allres">
+	<td ng-if="$index==0">SL<br/>
+	NO</td>
+	<td ng-if="$index==0">
+	<b>roll no</b> <br/>
+	<b>reg no</b>
+
+
+	</td>
+	<td ng-if="$index==0"><b>Name of</b><br/>
+	<b>the students</b></td>
+
+   <td ng-if="$index==0" style="padding-left:15px;padding-right:15px;">
+	<div class="row">
+	<div   class="col"  ng-repeat="dpk in allres[0].dps">
+		<div class="row">
+		<div class="col" style="border:1px solid black;">TC-{{sublist[$index].tc}}</div><div class="col" style="border:1px solid black;">TF-{{sublist[$index].tf}}</div>
+		<div class="col">
+			<div class="row">
+		<div class="col" style="border:1px solid black;">Total <br/>{{dpk.fullmark}}</div>
+		<div class="col" style="border:1px solid black;">GP</div>
+			</div>
+		</div>
+		</div></div>
+		</div>
+	
+		<div class="row">
+	<div   class="col"  ng-repeat="dpk in allres[0].dps">
+		<div class="row">
+		<div class="col" style="border:1px solid black;">PC-{{sublist[$index].pc}}</div><div class="col" style="border:1px solid black;">PF-{{sublist[$index].pf}}</div>
+		<div class="col">
+			<div class="row">
+		<div class="col" style="border:1px solid black;">LETTER GRADE</div>
+			</div>
+		</div>
+		</div></div>
+		</div>
+	
+	</td>
+	
+	<td  ng-if="$index==0"  style="padding-right:15px;text-align:center;width:100px;" >
+	<div class="row">
+	<div class="col">
+	
+	gpa
+	<br/>
+	<br/>
+leter grade
+	</div>
+   <div class="col" style="border:1px solid black;height:65px;width:30px;">status</div>
+	</div>
+	</td>
+	
+	
+	</tr>
+	
+	
+	<tr ng-repeat="ps in allres">
+	<td>{{$index+1}}</td>
+	
+	<td>
+	<b>{{ps.rst.roll}}</b> <br/> <br/>
+	<b>{{ps.rst.regno}}</b>
+	</td>
+	
+	
+	<td>
+	{{ps.rst.name}}
+	</td>
+
+   <td style="padding-left:15px;padding-right:15px;">
+   
+	<div class="row">
+	
+	<div   class="col"  ng-repeat="dp1 in ps.dps">
+		<div class="row">
+		
+		<div class="col" style="border:1px solid black;height:30px;">{{dp1.tc}}</div>
+		<div class="col" style="border:1px solid black;height:30px;">{{dp1.tf}}</div>
+		
+		<div class="col" style="border:1px solid black;text-align:center;height:30px;">
+	<div style="border:1px solid black;" class="row">
+	{{dp1.fullmark}} 
+	</div>	
+	<div style="border:1px solid black;" class="row">
+	{{dp1.gradepoint}}
+	</div>
+	</div>
+	
+	</div>
+	</div>
+	
+	</div>
+	
+	
+		<div class="row">
+		
+	<div   class="col"  ng-repeat="dn in ps.dps">
+		<div class="row">
+		<div class="col" style="border:1px solid black;height:30px;">{{dn.pc}}</div>
+		<div class="col" style="border:1px solid black;height:30px;">{{dn.pf}}</div>
+		
+				<div class="col" style="border:1px solid black;height:30px;">
+				{{dn.grade}}
+		
+			</div>
+		</div></div>
+		
+		</div>
+		
+		
+	</td>
+	
+	
+	
+	
+	<td  style="padding-left:15px;PADDING-RIGHT:15PX;">
+	<div class="row">
+	<div class="col">
+	
+<div class="row" >
+	<div class="col" style="border:1px solid black;height:32px;">
+	{{ps.rst.sms}}
+	</div>
+	<div class="col" style="border:1px solid black;height:32px;">
+	
+	<br/> {{ps.rst.gpa}}</div>
+	</div>
+	
+	</div>
+	
+	<div class="col" style="border:1px solid black;height:65px;"></div>
+	</div>
+	</td>
+	
+	
+	</tr>	
+	
+</table>
+
+
+	
+	
+
+<br/>
+<br/>
+
+	
+<br/>	
+	</div>  
+		<div>
+<div class="row">
+<div class="col">
+<b>....................</b>
+<br/>
+Prepared By
+</div>
+
+<div class="col">
+<b>....................</b><br/>
+Compared by
+</div>
+
+
+<div class="col">
+<b>....................</b><br/>
+Head of the Department
+</div>
+<div class="col">
+<b>....................</b><br/>
+Head of the Institute
+</div>
+</div>	</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<br/>
+	<br/>
+		<div id="sh" align="center" style="margin-top:1000px;background-color:skyblue;margin-left:50px;margin-right:50px;margin-bottom:200px;padding-bottom:50px;">
+		<br/>
+		<br/>
+	<div align="center" class="row" style="background-color:ghostwhite;padding:15px;" >
+		<div class="col">
+			<b style="color:green;">total number of result record's={{tti}}</b> <br/>
+	<b>show result record's</b> <br/>
+	<br/>
+	from SL NO:<input type="number" ng-model="fi" />  to SL NO::<input type="number" ng-model="ti" /> <button ng-click="limitshow();" class="btn btn-sm btn-dark">submit</button>
+	</div>
+	
+</div>
+	<br/>
+	<br/>
 	<table border="1" align="center" >
 		<tr>
 	<th>session</th>
 	<th>department</th>
 	<th>semseter</th>
 	</tr>
-
-	
-	<tr>
+		<tr>
 	<td><select ng-model="p.session"   ng-options="c for c in sch"></select></td>
 	<td><select ng-model="p.dept"      ng-options="c for c in khan2"></select></td>
 	<td><select ng-model="p.semester"  ng-options="c for c in khan1"></select></td>
 	</tr>
 	
 	</table>
-		<br/>
-
+		
+<br/>
+	<div align="center" class="row" >
+		<div class="col">
+	<button class="btn btn-sm btn-dark" ng-click="hidesh()">hide unneccessary part</button>
+	</div>
+	<div class="col" style="text-align:left;">
 	<button ng-click="getall();" class="btn btn-sm btn-success" style="margin-left:35%;">submit</button>
 	</div>
+	</div>
+
+
 	<br/>
-	<br/>
-	<h4>Badiul Alam Science And Technology Institute</h4>
-	<h4>Kasba , Brahmanbaria</h4>
-	<h4>Result of {{p.semester}} Semester , Session-{{p.session}}</h4>
-	<h4>Technology : {{p.dept}}</h4>
-
-
-	<div class="html-content" style="padding:50px;text-align:center;">
+<table border="1">
+<tr ng-if="allres.length>0">
+<th>SL NO</th><th>subject name<th>tc</th><th>tf</th><th>pc</th><th>pf</th>
+</tr>
+<tr ng-if="allres.length>0" ng-repeat="x in allres[0].dps">
+<td>{{$index+1}}</td>
+<td>{{x.subname}}</td>
+<td ><input style="width:80px;" type="text" ng-model="sublist[$index].tc"/></td>
+<td><input style="width:80px;" type="text" ng-model="sublist[$index].tf"/></td>
+<td><input style="width:80px;" type="text" ng-model="sublist[$index].pc"/></td>
+<td><input style="width:80px;" type="text" ng-model="sublist[$index].pf"/></td>
+</tr>
+</table>	
 	
-
-	<table border="1" align="center" ng-if="allres.length!=0" style="font-size:1.3em;font-weight:500;">
-	
-	<tr>
-	<th>SL NO</th>
-	<th>STUDENT NAME</th>
-	<th>ROLL NO</th>
-	<th>REG NO</th>
-	<th>GPA</th>
-	</tr>
-	
-	<tr ng-repeat="x in allres">
-	<td>{{$index+1}}
-	<td>{{x.name}}</td>
-	<td>{{x.roll}}</td>
-	<td>{{x.regno}}</td>
-	<td>{{x.gpa}}</td>
-	</tr>
-	
-	</table>
-
-
-	</div>	
-	
-	
-<div class="row">
-<div class="col">
-<b>.....................</b>
-<br/>
-Prepared By
-</div>
-<div class="col">
-<b>....................</b><br/>
-Head of the dept
-</div>
-<div class="col">
-<b>...............</b><br/>
-Principal
-</div>
-</div>	
-	
-<br/>
-<br/>	
-	
-	
-	
-	
-	
-	</div>  
+	</div>
 
 </body>
 </html>
