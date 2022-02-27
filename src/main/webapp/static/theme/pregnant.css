@@ -1,9 +1,12 @@
+
 #hc{
 	
-	background-image:url("basati.jpg");
-	background-size:440px 600px;
+	background-image:url("circulb.jpg");
+	background-size:900px 800px;
 	 background-repeat: no-repeat;
 	   background-position:center;
-	   background-filter:blur(70px);
+	background-color:rgb(233,237,241)
+	  
+	  
 	
 }
