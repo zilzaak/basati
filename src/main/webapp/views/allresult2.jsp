@@ -41,7 +41,7 @@ module.controller("ar",function($scope,$http){
 	$scope.sublist.push(m1); $scope.sublist.push(m2);$scope.sublist.push(m3);$scope.sublist.push(m4);
 	$scope.sublist.push(m5); $scope.sublist.push(m6);$scope.sublist.push(m7);$scope.sublist.push(m8);
 	$scope.sublist.push(m9);$scope.sublist.push(m10);
-	$scope.fi=null;
+	$scope.fi=1;
 	$scope.ti=null;
 	$scope.tti=null;
 	
@@ -218,7 +218,7 @@ leter grade
 	
 	
 	<tr ng-repeat="ps in allres">
-	<td>{{$index+1}}</td>
+	<td>{{$index+fi}}</td>
 	
 	<td>
 	<b>{{ps.rst.roll}}</b> <br/> <br/>
