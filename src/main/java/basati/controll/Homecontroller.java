@@ -66,13 +66,7 @@ public class Homecontroller {
 		return "adminset";
 	}
 	
-		@RequestMapping("/allresult2")
 	
-	public String allresult2() {
-	
-		return "allresult2";
-		
-	}
 	@PostMapping("/addmail")
 	
 	public ModelAndView addmail(@RequestParam String email,@RequestParam String pass) {
@@ -250,7 +244,13 @@ return new ResponseEntity<Admin>(forgot,HttpStatus.OK);
 	}	
 	
 	
+	@RequestMapping("/allresult2")
 	
+	public String allresult2() {
+	
+		return "allresult2";
+		
+	}	
 	
 	public List<Department> dlst2=new ArrayList<Department>();
 	
@@ -260,7 +260,7 @@ return new ResponseEntity<Admin>(forgot,HttpStatus.OK);
 		 List<Department> dl2=new ArrayList<Department>();
 		 dlst2=dl2;
 		List<Resultst> lst=new ArrayList<>();
-		List<Department> dlst=drr.findBySessionAndDeptAndSemester(dp.getSession(),dp.getDept(),dp.getSemester());
+		List<Department> dlst=drr.findBySessionAndDeptAndSemesterOrderByRollnoAsc(dp.getSession(),dp.getDept(),dp.getSemester());
 
 		
 		for(Department d : dlst) {
@@ -544,6 +544,11 @@ ad.setCode("sorry code is wrong , try again");
 return new ResponseEntity<Admin>(ad,HttpStatus.OK);
 
 }
+
+
+
+
+
 
 
 
