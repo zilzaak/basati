@@ -503,6 +503,9 @@ return new ResponseEntity<Admin>(ad,HttpStatus.OK);
 }
 
 
+
+
+
 @PutMapping("/updatede")
 
 public ResponseEntity<Department> updatede(@RequestBody Department fdept) {
