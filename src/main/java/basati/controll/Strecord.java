@@ -33,35 +33,114 @@ private Departmentrepo drr;
 @Autowired
 private Serialmakerepo srr;
 	
+List<Department> uinlist=new ArrayList<Department>();
+public boolean checkunique(Department d) {
+	int count=0;
+	for(Department dp : uinlist) {
+		if(d.getRollno().contentEquals(dp.getRollno())) {
+			count++;
+		}
+	}
+	
+	if(count<1) {
+		uinlist.add(d);
+		return false;
+	}
+	
+	return true;
+}
+	
 	@PostMapping("/substrecord")
 	public ResponseEntity<List<Department>> strecordadd(@RequestBody List<Department> record){
+		uinlist=new ArrayList<Department>();
+		String dupin="";
+		for(Department dp : record) {
+
+		if(checkunique(dp)) {
+			dupin=dupin+" duplicate student roll input for roll no:"+dp.getRollno()+", ";
+		}
+		}	
+		
+		if(!dupin.contentEquals("")) {
+			record.get(0).setStringdate(dupin);	
+			return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);
+		}
+		
+		
+		
+		
 		if(drr.count()<1) {
-			drr.save(record.get(0));
-			if(record.size()>1) {
-				record.remove(0);
+                drr.saveAll(record);
+				record.get(0).setStringdate("successfully added unique record");	
+				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);
+					
+		}
+		
+		
+			List<Department> lst =drr.findBySessionAndDeptAndSemesterAndSubcodeOrderByRollnoAsc(record.get(0).getSession(),record.get(0).getDept(),
+					record.get(0).getSemester(),record.get(0).getSubcode());
+		
+		for(Department d : record) {
+		List<Department> lstr =drr.findBySessionAndDeptAndSemesterAndRollno(d.getSession(),
+				d.getDept(),d.getSemester(),d.getRollno());	
+		if(!lstr.isEmpty()) {
+			if(!d.getStudentname().contentEquals(lstr.get(0).getStudentname())) {
+				String f="student name of roll no "+d.getRollno()+" should be "+lstr.get(0).getStudentname()+" edit please ";
+				record.get(0).setStringdate(f);
+				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);	
 			}
 		}
 		
-		String sms="";
+		if(!lst.isEmpty()) {
+			if(!lst.get(0).getSubname().contentEquals(d.getSubname())) {
+							String x="subject name "+d.getSubname()+" do not match for subject code "+d.getSubcode()+" change it to "+lst.get(0).getSubname()+",";
+				record.get(0).setStringdate(x);
+				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);
+						}
+			if(lst.get(0).getFullmark()!=d.getFullmark()) {
+				String y="full mark should be "+lst.get(0).getFullmark()+"for subject code "+d.getSubcode()+" edit please,";
+				record.get(0).setStringdate(y);
+				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);
+			}	
+			
+		if(lst.get(0).getCredit()!=d.getCredit()) {
+			String z="credit should be "+lst.get(0).getCredit()+" for subject code "+d.getSubcode()+" edit please,";
+				record.get(0).setStringdate(z);
+				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);
+			}
+		
+		
+		
+		
+				}
+		
+	}
+		
+
+
+	
+	
+		
+		
+	String sms="";	
+		
 		
 		for(Department d : record) {		
 	if(drr.existsBySessionAndDeptAndSemesterAndRollnoAndSubcode(d.getSession(),d.getDept(),d.getSemester(),d.getRollno(),d.getSubcode())) {
-			int g =record.indexOf(d)+1;
-			sms=sms+",record no "+g+",";
+			
+			sms=sms+",name:"+d.getStudentname()+" roll: "+d.getRollno()+"subject code: "+d.getSubcode()+",";
 			
 		}
-	if(!drr.existsBySessionAndDeptAndSemesterAndRollnoAndSubcode(d.getSession(),d.getDept(),d.getSemester(),d.getRollno(),d.getSubcode())) {
-		drr.save(d);
-		
-	}
+
 			
 		}
 		
 		if(!sms.contentEquals("")){
-			sms="sorry!! can not insert duplicate roll or regno for particular subcode and dept as "+sms+",are same or already added";
+			sms="sorry!! can not insert these students record because these record already added "+sms+",";
 			record.get(0).setStringdate(sms);
 		}
 		if(sms.contentEquals("")){
+			drr.saveAll(record);
 			sms="successfully added unique record";
 			record.get(0).setStringdate(sms);
 		}
@@ -161,14 +240,15 @@ private Serialmakerepo srr;
 	  
 	  
 	  if(!dp.getRollno().contentEquals(chng.getRollno())) {
-		  	if(!drr.existsBySessionAndDeptAndSemesterAndRollno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRollno())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno());
+		  	if(!drr.existsBySessionAndDeptAndSemesterAndStudentnameAndRollno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getStudentname(),dp.getRollno())) {
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getStudentname(),chng.getRollno());
 		for(Department dk : lst) {
 		dk.setRollno(dp.getRollno());
 		   drr.save(dk);
 			System.out.println("updating the roll no for name:"+dk.getStudentname());
 		}
 		}
+		  	
 		else {
 			sms=sms+" duplicate roll no , can not update , ";
 			System.out.println("sorry duplicate roll no found");
@@ -178,22 +258,14 @@ private Serialmakerepo srr;
 	  }
 	 
 	  if(!dp.getRegno().contentEquals(chng.getRegno())) {
-		  
-		  
-		if(!drr.existsBySessionAndDeptAndSemesterAndRegno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRegno())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRegno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRegno());
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRegno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getStudentname(),chng.getRegno());
 		for(Department dk : lst) {
 			dk.setRegno(dp.getRegno());
 			drr.save(dk);
 			System.out.println("updating the reg no for name:"+dk.getStudentname());
 				}
-		}
-		else {
-			sms=sms+" duplicate reg no , can not update , ";
-		}
-		
-
-			  }
+	
+	  }
 	   
 	 		if(chng!=dp || chng==null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -303,10 +375,11 @@ private Serialmakerepo srr;
 	}	
 		
 	public List<Department> lst2 = new ArrayList<Department>();
-	
-	
+
 	@PostMapping("/submark")
 	public ResponseEntity<List<Department>> filtstudent(@RequestBody List<Department> lst) throws ParseException{
+	 
+		
 	lst2=lst;
 String sms="";
 		boolean x=false;
@@ -315,7 +388,7 @@ String sms="";
 		Department chng=null;
 	chng=drr.findById(dn.getDid()).get();
 	if(!chng.getRollno().contentEquals(dn.getRollno()) || !chng.getRegno().contentEquals(dn.getRegno()) || !chng.getStudentname().contentEquals(dn.getStudentname())) {
-sms=sms+" Sorry ,press update button for Name:"+dn.getStudentname()+", roll no: "+dn.getRollno()+",subject code:"+dn.getSubcode()+" ,";
+	sms=sms+" Sorry ,press update button for Name:"+dn.getStudentname()+", roll no: "+dn.getRollno()+",subject code:"+dn.getSubcode()+"as you have edited this record,";
 x=true;
 	}
 	}
