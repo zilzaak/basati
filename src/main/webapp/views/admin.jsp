@@ -94,16 +94,12 @@ if(v.studentname=="" || v.dept=="" || v.semester=="" || v.subcode==null || v.rol
 	}
 		
 }
+
 $scope.clearstrecord=function(){
-	
-angular.forEach($scope.strecord,function(v,k){
-v.rollno=null;
-v.studentname=""; 
-v.regno=null;
-	
-	
-});
-	
+	$scope.p.subcode=null;
+$scope.p.subname="";
+$scope.p.fullmark=null;
+$scope.p.credit=null; 	
 	
 }
 
@@ -385,17 +381,8 @@ $scope.marktime2=function(){
 		alert("can not update full mark or subject name , first select session , deparment and subcode");
 	}
 		
-
-	
-   	
-	        	
-	        	
 		
 	}	
-
-
-
-
 
 
 
@@ -414,9 +401,9 @@ $scope.reg=function(){
 	$scope.en="no";	
 var  epl1=""; var epm1=""; var epm2="";
 
-if($scope.admin.password.length!=4){
+if($scope.admin.password.length!=6){
 	$scope.epl="yes";
-	epl1="password length must be 4";
+	epl1="password length must be 6";
 }
 
 if($scope.admin.password!=$scope.confirm){
@@ -600,18 +587,18 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 
 
 
-<div  style="margin-left:8%;background-color:brown;width:85%;display:none;font-size:0.80em;" id="1">
+<div  style="margin-left:8%;background-color:#66CDAA;width:85%;display:none;font-size:0.80em;" id="1">
 <br/>
   <h5 style="color:white;text-align:center;">select subject</h5> 
 <table border="1" align="center" >
 <tr>
-<th>session*</th>
-<th>Department*</th>
-<th>Semester*</th>
-<th>subject code*</th>
-<th>sub name*</th>
-<th>total mark*</th>
-<th>credit*</th>
+<th style="background-color:blue;">session*</th>
+<th style="background-color:blue;">Department*</th>
+<th style="background-color:blue;">Semester*</th>
+<th style="background-color:blue;">subject code*</th>
+<th style="background-color:blue;">sub name*</th>
+<th style="background-color:blue;">total mark*</th>
+<th style="background-color:blue;">credit*</th>
 </tr>
 <tr>
 <td><select  ng-model="p.session" ng-options="c for c in sch"></select></td>
@@ -620,9 +607,12 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <td><input type="number" style="width:100px;"  ng-model="p.subcode"/></td>
 <td><input type="text"  ng-model="p.subname"/></td>
 <td><input type="number"  style="width:70px;"  ng-model="p.fullmark"/></td>
-<td><input type="number"  style="width:70px;"  ng-model="p.credit"/></td>
+<td><input type="number"  style="width:70px;"  ng-model="p.credit"/>   
+  </td>
 </tr>
 </table>
+<br/>
+<div class="row" style="text-align:center;"><button class="btn btn-primary btn-sm"  style="margin-left:30%;" ng-click="clearstrecord()">clear subject</button></div>
 <br/>
   <h5 style="color:white;text-align:center;">exam duration, year and others</h5> 
 <table border="1" align="center" >
@@ -667,10 +657,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <br/>
 
 <div class="row">
-
-<button class="btn btn-success btn-sm" style="margin-left:30%;" ng-click="substrecord()">submit</button> 
-<button class="btn btn-success btn-sm"  style="margin-left:30%;" ng-click="clearstrecord()">clear</button> 
-
+<button class="btn btn-success btn-sm" style="margin-left:30%;" ng-click="substrecord()">submit</button>
 </div>
 
 <br/>
@@ -790,7 +777,7 @@ subject credit:-<input type="number" ng-model="fdept[0].credit" ng-change="markt
 
 <td style="background-color:gray;">
 <b>student name</b> <br/>
-<input  ng-model="x.studentname" />
+<input  ng-model="x.studentname"/>
 <br/>
 <b>roll no</b> <br/>
 <input  ng-model="x.rollno"  /> <br/>
