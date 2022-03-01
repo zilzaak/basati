@@ -52,6 +52,30 @@ module.controller("ar",function($scope,$http){
 	}
 	
 	
+$scope.checkdept=function(t){
+	
+	
+	if(t.includes('mputer')){
+		
+		return 'com'
+	}
+	if(t.includes('ivil')){
+		
+		return 'civ'
+	}
+
+	if(t.includes('lectrical')){
+		
+		return 'et'
+	}
+	
+	
+}	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -111,13 +135,14 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<h4>Badiul Alam Science And Technology Institute</h4>
 	<h4>Kasba , Brahmanbaria</h4>
 	<h4>Result of {{p.semester}} Semester , Session-{{p.session}}</h4>
-	<h4>Technology : {{p.dept}}</h4>
+	<h4>Technology : <b ng-if="checkdept(p.dept)=='com'">Computer</b><b ng-if="checkdept(p.dept)=='civ'">Civil</b>
+	<b ng-if="checkdept(p.dept)=='et'">Electrical</b></h4>
 
 
 	<div class="html-content" style="padding:50px;text-align:center;">
 	
 
-	<table border="1" align="center" ng-if="allres.length!=0" style="font-size:1.3em;font-weight:500;">
+	<table border="1" align="center" ng-if="allres.length!=0" style="font-size:1.3em;font-weight:500;width:90%;">
 	
 	<tr>
 	<th>SL NO</th>
