@@ -85,7 +85,30 @@ $scope.hidesh=function(){
 	document.getElementById("sh").style.display="none";
 }	
 	
+$scope.checkdept=function(t){
 	
+	
+	if(t.includes('mputer')){
+		
+		return 'com'
+	}
+	if(t.includes('ivil')){
+		
+		return 'civ'
+	}
+
+	if(t.includes('lectrical')){
+		
+		return 'et'
+	}
+	
+	
+}
+
+
+
+
+
 });
 	
 </script>
@@ -129,11 +152,12 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 </div>
 
 <div class="row" align="center">
-<div class="col">{{allres[0].rst.dept}} <br/>
+<div class="col"><b>Technology :</b> <b ng-if="checkdept(allres[0].rst.dept)=='com'">Computer(66)</b><b ng-if="checkdept(allres[0].rst.dept)=='civ'">Civil(64)</b>
+	<b ng-if="checkdept(allres[0].rst.dept)=='et'">Electrical(67)</b><br/>
 <b>Institute Name: Badiul Alam Science and Technology Institute</b>
 </div>
 <div class="col">
-{{allres[0].rst.semester}} Semester Examination( {{allres[0].dps[0].duration}}) <br/>
+<b>{{allres[0].rst.semester}} Semester Examination( {{allres[0].dps[0].duration}})</b> <br/>
 <b>Session: {{allres[0].rst.session}}</b>
 </div>
 </div>
@@ -241,10 +265,10 @@ leter grade
 		<div class="col" style="border:1px solid black;height:30px;">{{dp1.tf}}</div>
 		
 		<div class="col" style="border:1px solid black;text-align:center;height:30px;">
-	<div style="border:1px solid black;" class="row">
-	{{dp1.fullmark}} 
+	<div style="border:1px solid black;padding-left:10px;" class="row">
+	{{dp1.total}} 
 	</div>	
-	<div style="border:1px solid black;" class="row">
+	<div style="border:1px solid black;padding-left:10px;" class="row">
 	{{dp1.gradepoint}}
 	</div>
 	</div>
