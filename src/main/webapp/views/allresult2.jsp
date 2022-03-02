@@ -144,7 +144,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	  %>
 	   
 	 <div id="k"> 
-<div style="background-color:ghostwhite;margin-left:-350px;margin-top:173px;padding-left:15px;border:2px solid black;width:1750px;height:1200px;" >
+<div style="background-color:ghostwhite;margin-left:-350px;margin-top:173px;padding-left:15px;border:2px solid black;width:1750px;height:1140px;" >
 <br/>
 <div style="text-align:center;">
 <b>Bangldesh Technical Education Board , Dhaka</b> <br/>
@@ -228,12 +228,12 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<div class="row">
 	<div class="col">
 	
-	gpa
+	GPA
 	<br/>
 	<br/>
 leter grade
 	</div>
-   <div class="col" style="border:1px solid black;height:65px;width:30px;">status</div>
+   <div class="col" style="border:1px solid black;height:65px;width:30px;margin-left:11px;">status</div>
 	</div>
 	</td>
 	
@@ -306,11 +306,11 @@ leter grade
 	
 <div class="row" >
 	<div class="col" style="border:1px solid black;height:32px;">
-	{{ps.rst.sms}}
+	{{ps.rst.gpa}}
 	</div>
 	<div class="col" style="border:1px solid black;height:32px;">
 	
-	<br/> {{ps.rst.gpa}}</div>
+	<br/>{{ps.rst.sms}} </div>
 	</div>
 	
 	</div>
@@ -323,28 +323,30 @@ leter grade
 	</tr>	
 	
 </table>
-	
+
 	</div>  
 		<div>
+			<br/>
+	<br/>
 <div class="row">
 <div class="col">
-<b>....................</b>
+<b>.................................</b>
 <br/>
-Prepared By
+      <p style="margin-left:26px;"> Prepared By</p>
 </div>
 
 <div class="col">
-<b>....................</b><br/>
-Compared by
+<b>................................</b><br/>
+     <p style="margin-left:20px;"> Compared by</p>
 </div>
 
 
 <div class="col">
-<b>....................</b><br/>
+<b style="margin-left:12px;">..................................</b><br/>
 Head of the Department
 </div>
 <div class="col">
-<b>....................</b><br/>
+<b style="margin-left:7px;">..............................</b><br/>
 Head of the Institute
 </div>
 </div>	</div>
