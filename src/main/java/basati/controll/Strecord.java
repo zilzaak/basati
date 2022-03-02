@@ -37,7 +37,7 @@ List<Department> uinlist=new ArrayList<Department>();
 public boolean checkunique(Department d) {
 	int count=0;
 	for(Department dp : uinlist) {
-		if(d.getRollno().contentEquals(dp.getRollno())) {
+		if(d.getRollno().contentEquals(dp.getRollno()) || d.getRegno().contentEquals(dp.getRegno())) {
 			count++;
 		}
 	}
@@ -57,7 +57,7 @@ public boolean checkunique(Department d) {
 		for(Department dp : record) {
 
 		if(checkunique(dp)) {
-			dupin=dupin+" duplicate student roll input for roll no:"+dp.getRollno()+", ";
+			dupin=dupin+" duplicate input of roll or reg no for roll:"+dp.getRollno()+", ";
 		}
 		}	
 		
@@ -108,11 +108,7 @@ public boolean checkunique(Department d) {
 				record.get(0).setStringdate(z);
 				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);
 			}
-		
-		
-		
-		
-				}
+					}
 		
 	}
 		
@@ -126,9 +122,11 @@ public boolean checkunique(Department d) {
 		
 		
 		for(Department d : record) {		
-	if(drr.existsBySessionAndDeptAndSemesterAndRollnoAndSubcode(d.getSession(),d.getDept(),d.getSemester(),d.getRollno(),d.getSubcode())) {
+	if(drr.existsBySessionAndDeptAndSemesterAndRollnoAndSubcode(d.getSession(),d.getDept(),d.getSemester(),d.getRollno(),d.getSubcode())
 			
-			sms=sms+",name:"+d.getStudentname()+" roll: "+d.getRollno()+"subject code: "+d.getSubcode()+",";
+		||	drr.existsBySessionAndDeptAndSemesterAndRegnoAndSubcode(d.getSession(),d.getDept(),d.getSemester(),d.getRegno(),d.getSubcode())) {
+			
+			sms=sms+",name:"+d.getStudentname()+"roll: "+d.getRollno()+", reg no:"+d.getRegno()+",subject code: "+d.getSubcode()+",";
 			
 		}
 
@@ -240,8 +238,9 @@ public boolean checkunique(Department d) {
 	  
 	  
 	  if(!dp.getRollno().contentEquals(chng.getRollno())) {
-		  	if(!drr.existsBySessionAndDeptAndSemesterAndStudentnameAndRollno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getStudentname(),dp.getRollno())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getStudentname(),chng.getRollno());
+		  	if(!drr.existsBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getStudentname(),dp.getRollno(),dp.getRegno())) {
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(chng.getSession(),chng.getDept(),chng.getSemester(),
+				chng.getStudentname(),chng.getRollno(),chng.getRegno());
 		for(Department dk : lst) {
 		dk.setRollno(dp.getRollno());
 		   drr.save(dk);
@@ -258,7 +257,8 @@ public boolean checkunique(Department d) {
 	  }
 	 
 	  if(!dp.getRegno().contentEquals(chng.getRegno())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRegno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getStudentname(),chng.getRegno());
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(chng.getSession(),chng.getDept(),
+				chng.getSemester(),chng.getStudentname(),chng.getRollno(),chng.getRegno());
 		for(Department dk : lst) {
 			dk.setRegno(dp.getRegno());
 			drr.save(dk);
