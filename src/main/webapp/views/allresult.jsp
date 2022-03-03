@@ -31,7 +31,10 @@ module.controller("ar",function($scope,$http){
 
 	$scope.p={"dept":"","semester":"","session":"","subcode":null,"subname":"","fullmark":null};
 	
-	$scope.allres=[];
+	$scope.allres=[];$scope.allr=[];
+	$scope.tor=null;
+	$scope.totalr=null;
+	$scope.fromr=null;
 	
 	$scope.getall=function(){
      
@@ -43,13 +46,39 @@ module.controller("ar",function($scope,$http){
 			
 		        }).then(function(response){
 		        	
+		        	$scope.allr=response.data;
 		        	$scope.allres=response.data;
-    	document.getElementById("sh").style.display="none";
-	 
+		        	$scope.tor=response.data.length;;
+		        	$scope.totalr=response.data.length;
+		        	$scope.fromr=1;
+		        	
 		        	})	
 		
+}
 	
-	}
+	
+	
+$scope.filtrecord=function(){
+	     $scope.allres=[];
+	angular.forEach($scope.allr,function(v,k){
+		var ck=k+1;
+		if($scope.fromr<=ck && ck<=$scope.tor){
+			$scope.allres.push(v);
+		}
+		
+	})
+	
+	$scope.totalr=$scope.allres.length;
+	
+		
+}
+	
+	
+$scope.hidesh=function(){
+	
+	document.getElementById("sh").style.display="none";
+		
+}	
 	
 	
 $scope.checkdept=function(t){
@@ -105,32 +134,12 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	response.sendRedirect("${pageContext.request.contextPath}");
 	}
 	  %>
-	   
+	  
+	 
 	   
 
 	<div class="container" style="background-color:ghostwhite;margin:50px;margin-left:30px;border:2px solid black;" align="center">
-	
-	<div id="sh">
-	<table border="1" align="center" >
-		<tr>
-	<th>session</th>
-	<th>department</th>
-	<th>semseter</th>
-	</tr>
-
-	
-	<tr>
-	<td><select ng-model="p.session"   ng-options="c for c in sch"></select></td>
-	<td><select ng-model="p.dept"      ng-options="c for c in khan2"></select></td>
-	<td><select ng-model="p.semester"  ng-options="c for c in khan1"></select></td>
-	</tr>
-	
-	</table>
 		<br/>
-
-	<button ng-click="getall();" class="btn btn-sm btn-success" style="margin-left:35%;">submit</button>
-	</div>
-	<br/>
 	<br/>
 	<h4>Badiul Alam Science And Technology Institute</h4>
 	<h4>Kasba , Brahmanbaria</h4>
@@ -139,7 +148,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<b ng-if="checkdept(p.dept)=='et'">Electrical</b></h4>
 
 
-	<div class="html-content" style="padding:50px;text-align:center;">
+	<div class="html-content" style="padding:50px;text-align:center;height:1100px;">
 	
 
 	<table border="1" align="center" ng-if="allres.length!=0" style="font-size:1.3em;font-weight:500;width:90%;">
@@ -153,7 +162,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	</tr>
 	
 	<tr ng-repeat="x in allres">
-	<td>{{$index+1}}
+	<td>{{$index+fromr}}
 	<td>{{x.name}}</td>
 	<td>{{x.roll}}</td>
 	<td>{{x.regno}}</td>
@@ -166,7 +175,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	</div>	
 	
 	
-<div class="row">
+<div class="row" style="margin-top:70px;">
 <div class="col">
 <b>.....................</b>
 <br/>
@@ -181,15 +190,46 @@ Head of the dept
 Principal
 </div>
 </div>	
-	
-<br/>
+
 <br/>	
 	
-	
-	
-	
-	
 	</div>  
+	
+	
+	
+	
+		  	<div id="sh"  style="margin-top:200px;padding:50px;background-color:skyblue;" class="row">
+		  	
+		  	<div class="col col-md-4" style="text-align:center;">
+		  	<table border="1" align="center" >
+		<tr>
+	<th>session</th>
+	<th>department</th>
+	<th>semseter</th>
+	</tr>
+
+	
+	<tr>
+	<td><select ng-model="p.session"   ng-options="c for c in sch"></select></td>
+	<td><select ng-model="p.dept"      ng-options="c for c in khan2"></select></td>
+	<td><select ng-model="p.semester"  ng-options="c for c in khan1"></select></td>
+	</tr>
+	
+	</table>
+	
+			<br/>
+<button ng-click="getall();" class="btn btn-sm btn-success" style="margin-left:2%;">submit</button> <button class="btn btn-sm btn-dark" style="margin-left:100px;"ng-click="hidesh()">hide this part</button>
+
+		  	</div> 
+		  	
+		  	<div class="col col-md-8" style="background-color:white;padding:20px;">
+		  	<h4>Total number of students: </h4><b>{{totalr}}</b>
+		  	<br/>
+		  <b>SL NO is from:</b> <input type="number" ng-model="fromr"/>	<b>to SL NO:</b><input type="number" ng-model="tor"/>  	<button class="btn btn-success btn-sm" ng-click="filtrecord()">submit</button>
+		  	</div>
+	
+
+	</div> 
 
 </body>
 </html>
