@@ -28,7 +28,7 @@ $scope.p={"dept":"","semester":"","session":"","subcode":null,"subname":"","full
 $scope.p2={"dept":"","semester":"","session":"","subcode":""};
 $scope.p3={"dept":"","semester":"","rollno":""};
 
-$scope.dps=[];
+$scope.dps=null;
 $scope.gotresult=null;
 
 $scope.findresult=function(){
@@ -47,11 +47,6 @@ $scope.findresult=function(){
 	        	})		
 		
 	}
-	
-	
-	
-	
-
 	        	
 	        	
 })
@@ -110,8 +105,8 @@ background-color:steelblue;
 
 
 
-<div  style="margin-left:8%;background-color:ghostwhite;width:85%;font-size:0.80em;" id="3">
-<h2 style="text-align:center;color:green;background-color:white;padding:5px;">get result</h2>
+<div  style="margin-left:8%;background-color:#66CDAA;width:85%;font-size:0.80em;" id="3">
+<h2 style="text-align:center;color:green;background-color:#66CDAA;padding:5px;">get result</h2>
 
 <table border="1" align="center" >
 <tr>
@@ -131,21 +126,21 @@ background-color:steelblue;
 <br/>
 
 
-<div style="background-color:black;color:white;padding:10px;" align="center" ng-if="gotresult!=null">
+<div style="background-color:#66CDAA;padding:10px;" align="center" ng-if="gotresult!=null">
 <h4 style="color:green;">note::{{gotresult.sms}}</h4>
 <ul style="list-style-type:none;">
 <li>Technology::{{p3.dept}}</li>
 <li>roll no::{{p3.rollno}}</li>
 <li>Session::{{gotresult.session}}</li>
 <li>reg no::{{gotresult.regno}}</li>
-<li>Result::{{gotresult.gpa}} (out of 4)</li>
+<li style="color:white;font-size:1.5em;">Result::{{gotresult.gpa}} (out of 4)</li>
 <li></li>
 </ul>
 </div>
 
 <div style="background-color:skyblue;color:darkslategrey;padding:10px;" align="center">
 <table border="1" align="center" >
-<tr ng-if="dps.length!=0">
+<tr ng-if="dps.length>0">
 <th>subject</th>
 <th>full mark</th>
 <th>marks obtained</th>
@@ -163,13 +158,6 @@ background-color:steelblue;
 
 </table> 
 
-<div ng-if="dps.length==0" style="background-color:skyblue;" >
-<b>no record exist related to roll: {{p3.rollno}}, department::{{p3.dept}}, semester::{{p3.semester}}</b><br/>
-<b>insert the mark of the student whos roll is {{p3.rollno}} </b><br/>
-</div>
-
-<br/>
-<br/>
 
 
 </div>
