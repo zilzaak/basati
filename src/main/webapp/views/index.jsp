@@ -70,6 +70,7 @@ padding-bottom:30px;
 span:hover{
 color:red;
 background-color:skyblue;
+display:block;
 }
 table td:hover{
 background-color:silver; color:green;
@@ -103,8 +104,6 @@ background-color:steelblue;
 </head>
 <body  ng-controller="sellcontrol"  ng-app="sellapp">
 
-
-
 <div  style="margin-left:8%;background-color:#66CDAA;width:85%;font-size:0.80em;" id="3">
 <h2 style="text-align:center;color:green;background-color:#66CDAA;padding:5px;">get result</h2>
 
@@ -121,7 +120,7 @@ background-color:steelblue;
 </tr>
 </table> 
 <br/>
-<button style="margin-left:50%;" class="btn btn-success btn-sm" ng-click="findresult()">submit</button>
+<button style="margin-left:50%;" class="btn btn-dark btn-sm" ng-click="findresult()">submit</button>
 <br/>
 <br/>
 
@@ -157,13 +156,7 @@ background-color:steelblue;
 </tr>
 
 </table> 
-
-
-
 </div>
-
-
-
 </div>
 </body>
 </html>
