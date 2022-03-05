@@ -59,7 +59,7 @@ $scope.findresult=function(){
 body{
 box-sizing:border-box;
 background-image:url("/static/theme/sea.jpg");
-background-size:1400px 500px;
+background-size:1400px 700px;
 }
 .contain1{
 display:grid;
