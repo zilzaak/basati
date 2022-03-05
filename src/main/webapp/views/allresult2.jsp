@@ -345,7 +345,7 @@ leter grade
 			<br/>
 	<br/>
 	
-<div class="row">
+<div class="row"  style="margin-left:-100px;">
 <div class="col">
 <b>.................................</b>
 <br/>
