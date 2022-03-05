@@ -67,14 +67,22 @@ module.controller("ar",function($scope,$http){
 	
 	$scope.limitshow=function(){
 		$scope.allres=[];
+		    if(($scope.ti-$scope.fi)<10){
+		    	angular.forEach($scope.allr,function(v,k){
+		    		i=k+1;
+		    		if($scope.fi<=i && i<=$scope.ti ){
+		    		
+		    			$scope.allres.push(v);
+		    		}
+		    	})
+		    	
+		    }
+
+		    if(($scope.ti-$scope.fi)>=10){
+
+		    	alert("please select maximum 10 records");
+		    }	    
 		    
-angular.forEach($scope.allr,function(v,k){
-	i=k+1;
-	if($scope.fi<=i && i<=$scope.ti ){
-	
-		$scope.allres.push(v);
-	}
-})
 		
 	}	
 	
@@ -123,12 +131,17 @@ $scope.checkdept=function(t){
   
   table th{
 wrap-word:break-word;
-
+border-spacing:0px;
 }
 table td{
 wrap-word:break-word;
-
+  border-spacing: 0px;
+  padding:0px;
 }
+
+
+
+
 
 </style>
 
@@ -143,9 +156,11 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	}
 	  %>
 	   
+	   
+	   
 	 <div id="k"> 
-<div style="background-color:ghostwhite;margin-left:-350px;margin-top:173px;padding-left:15px;border:2px solid black;width:1750px;height:1140px;" >
-<br/>
+<div style="background-color:ghostwhite;margin-left:-340px;margin-top:120px;padding-left:15px;border:2px solid black;width:1500px;height:920px;" >
+
 <div style="text-align:center;">
 <b>Bangldesh Technical Education Board , Dhaka</b> <br/>
 <b>Tabulation Sheet for Diploma-in-Engineering</b>
@@ -166,7 +181,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 
 
 
-<table   border="1"   ng-if="allres.length!=0" style="font-weight:500;overflow-x:auto;width:1700px;font-size:0.50em;" >
+<table   border="1"   ng-if="allres.length!=0" style="font-weight:500;overflow-x:auto;width:1450px;font-size:0.50em;" >
 	<tr ng-repeat="x in allres">
 	<th ng-if="$index==0">--</th>
 	<th ng-if="$index==0">--</th>
@@ -216,7 +231,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 		<div class="col" style="border:1px solid black;">PC-{{sublist[$index].pc}}</div><div class="col" style="border:1px solid black;">PF-{{sublist[$index].pf}}</div>
 		<div class="col">
 			<div class="row">
-		<div class="col" style="border:1px solid black;">LETTER GRADE</div>
+		<div class="col" style="border:1px solid black;font-size:0.65em;">LETTER GRADE</div>
 			</div>
 		</div>
 		</div></div>
@@ -227,11 +242,12 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<td  ng-if="$index==0"  style="padding-right:15px;text-align:center;width:100px;" >
 	<div class="row">
 	<div class="col">
-	
 	GPA
+	
 	<br/>
 	<br/>
 leter grade
+
 	</div>
    <div class="col" style="border:1px solid black;height:65px;width:30px;margin-left:11px;">status</div>
 	</div>
@@ -261,14 +277,14 @@ leter grade
 	<div   class="col"  ng-repeat="dp1 in ps.dps">
 		<div class="row">
 		
-		<div class="col" style="border:1px solid black;height:30px;">{{dp1.tc}}</div>
-		<div class="col" style="border:1px solid black;height:30px;">{{dp1.tf}}</div>
+		<div class="col" style="border:0.45px solid black;height:36px;">{{dp1.tc}}</div>
+		<div class="col" style="border:0.45px solid black;height:36px;">{{dp1.tf}}</div>
 		
-		<div class="col" style="border:1px solid black;text-align:center;height:30px;">
-	<div style="border:1px solid black;padding-left:10px;" class="row">
+		<div class="col" style="border:0.45px solid black;text-align:center;height:36px;">
+	<div style="border:0.33px solid black;padding-left:10px;height:18px;" class="row">
 	{{dp1.total}} 
 	</div>	
-	<div style="border:1px solid black;padding-left:10px;" class="row">
+	<div style="border:0.30px solid black;padding-left:10px;height:18px;" class="row">
 	{{dp1.gradepoint}}
 	</div>
 	</div>
@@ -283,10 +299,10 @@ leter grade
 		
 	<div   class="col"  ng-repeat="dn in ps.dps">
 		<div class="row">
-		<div class="col" style="border:1px solid black;height:30px;">{{dn.pc}}</div>
-		<div class="col" style="border:1px solid black;height:30px;">{{dn.pf}}</div>
+		<div class="col" style="border:0.35px solid black;height:30px;">{{dn.pc}}</div>
+		<div class="col" style="border:0.35px solid black;height:30px;">{{dn.pf}}</div>
 		
-				<div class="col" style="border:1px solid black;height:30px;">
+				<div class="col" style="border:0.35px solid black;height:30px;">
 				{{dn.grade}}
 		
 			</div>
@@ -305,17 +321,17 @@ leter grade
 	<div class="col">
 	
 <div class="row" >
-	<div class="col" style="border:1px solid black;height:32px;">
+	<div class="col" style="border:0.35px solid black;height:35px;">
 	{{ps.rst.gpa}}
 	</div>
-	<div class="col" style="border:1px solid black;height:32px;">
+	<div class="col" style="border:0.35px solid black;height:32px;">
 	
 	<br/>{{ps.rst.sms}} </div>
 	</div>
 	
 	</div>
 	
-	<div class="col" style="border:1px solid black;height:65px;"></div>
+	<div class="col" style="border:0.35px solid black;height:69px;"></div>
 	</div>
 	</td>
 	
@@ -328,6 +344,7 @@ leter grade
 		<div>
 			<br/>
 	<br/>
+	
 <div class="row">
 <div class="col">
 <b>.................................</b>
@@ -351,14 +368,6 @@ Head of the Institute
 </div>
 </div>	</div>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	<br/>
 	<br/>
@@ -399,9 +408,8 @@ Head of the Institute
 	<button ng-click="getall();" class="btn btn-sm btn-success" style="margin-left:35%;">submit</button>
 	</div>
 	</div>
-
-
 	<br/>
+	
 <table border="1">
 <tr ng-if="allr.length>0">
 <th>SL NO</th><th>subject name<th>tc</th><th>tf</th><th>pc</th><th>pf</th>
