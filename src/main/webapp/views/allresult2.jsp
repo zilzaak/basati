@@ -159,7 +159,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	   
 	   
 	 <div id="k"> 
-<div style="background-color:ghostwhite;margin-left:-340px;margin-top:120px;padding-left:15px;border:2px solid black;width:1500px;height:920px;" >
+<div style="background-color:ghostwhite;margin-left:-340px;margin-top:120px;padding-left:15px;border:2px solid black;width:1500px;height:920px;border-bottom:0px;" >
 
 <div style="text-align:center;">
 <b>Bangldesh Technical Education Board , Dhaka</b> <br/>
@@ -178,10 +178,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 </div>
 <br/>
 
-
-
-
-<table   border="1"   ng-if="allres.length!=0" style="font-weight:500;overflow-x:auto;width:1450px;font-size:0.50em;" >
+<table   border="1"   ng-if="allres.length!=0" style="font-weight:500;overflow-x:auto;width:1460px;font-size:0.85em;" >
 	<tr ng-repeat="x in allres">
 	<th ng-if="$index==0">--</th>
 	<th ng-if="$index==0">--</th>
@@ -189,15 +186,21 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	
 	<th ng-if="$index==0" style="padding-left:15px;padding-right:15px;" >
 	
-	<div class="row" style="height:27px;">
+	<div class="row">
 	<div style="border:1px solid black;" class="col" ng-repeat=" dp in x.dps" >
 	{{dp.subname}}({{dp.subcode}}) 
 	</div>
 	</div>
 </th>
 
-	<th ng-if="$index==0">Result</th>
+	<th ng-if="$index==0" style="text-align:center;width:5%;">Result</th>
 	</tr>
+	
+	
+	
+	
+	
+	
 	
 	<tr ng-repeat="x in allres">
 	<td ng-if="$index==0">SL<br/>
@@ -205,9 +208,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<td ng-if="$index==0">
 	<b>roll no</b> <br/>
 	<b>reg no</b>
-
-
-	</td>
+</td>
 	<td ng-if="$index==0"><b>Name of</b><br/>
 	<b>the students</b></td>
 
@@ -215,7 +216,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<div class="row">
 	<div   class="col"  ng-repeat="dpk in allres[0].dps">
 		<div class="row">
-		<div class="col" style="border:1px solid black;">TC-{{sublist[$index].tc}}</div><div class="col" style="border:1px solid black;">TF-{{sublist[$index].tf}}</div>
+		<div class="col" style="border:1px solid black;">TC- <br/>{{sublist[$index].tc}}</div><div class="col" style="border:1px solid black;">TF- <br/>{{sublist[$index].tf}}</div>
 		<div class="col">
 			<div class="row">
 		<div class="col" style="border:1px solid black;">Total <br/>{{dpk.fullmark}}</div>
@@ -228,7 +229,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 		<div class="row">
 	<div   class="col"  ng-repeat="dpk in allres[0].dps">
 		<div class="row">
-		<div class="col" style="border:1px solid black;">PC-{{sublist[$index].pc}}</div><div class="col" style="border:1px solid black;">PF-{{sublist[$index].pf}}</div>
+		<div class="col" style="border:1px solid black;">PC- <br/>{{sublist[$index].pc}}</div><div class="col" style="border:1px solid black;">PF- <br/>{{sublist[$index].pf}}</div>
 		<div class="col">
 			<div class="row">
 		<div class="col" style="border:1px solid black;font-size:0.65em;">LETTER GRADE</div>
@@ -238,27 +239,35 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 		</div>
 	
 	</td>
-	
-	<td  ng-if="$index==0"  style="padding-right:15px;text-align:center;width:100px;" >
-	<div class="row">
-	<div class="col">
+		<td  ng-if="$index==0"  style="width:6%;">
+	<div class="row" style="margin-left:2%;margin-right:2%;">
+	<div class="col-sm-6" style="border:1px solid black;padding-left:0px;height:89px;">
 	GPA
-	
-	<br/>
-	<br/>
-leter grade
-
-	</div>
-   <div class="col" style="border:1px solid black;height:65px;width:30px;margin-left:11px;">status</div>
+<br/> 
+leter <br/>
+grade
+</div>
+   <div class="col-sm-6" style="border:1px solid black;padding-left:0px;height:89px;"><br/>status</div>
 	</div>
 	</td>
-	
 	
 	</tr>
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<tr ng-repeat="ps in allres">
-	<td>{{$index+fi}}</td>
+	<td style="text-align:center;">{{$index+fi}}</td>
 	
 	<td>
 	<b>{{ps.rst.roll}}</b> <br/> <br/>
@@ -316,36 +325,36 @@ leter grade
 	
 	
 	
-	<td  style="padding-left:15px;PADDING-RIGHT:15PX;">
-	<div class="row">
-	<div class="col">
+	<td  style="width:6%;">
+	<div class="row" style="width:100%;margin-left:2%;margin-right:2%;">
+	<div class="col-sm-6" style="height:100%;border:0.35px solid black;">
 	
-<div class="row" >
-	<div class="col" style="border:0.35px solid black;height:35px;">
+<div class="row" style="height:65px;">
+<div class="col" style="border:0.35px solid black;">
 	{{ps.rst.gpa}}
 	</div>
-	<div class="col" style="border:0.35px solid black;height:32px;">
 	
-	<br/>{{ps.rst.sms}} </div>
+	<div class="col" style="border:0.35px solid black;">
+	{{ps.rst.sms}} 
 	</div>
-	
 	</div>
-	
-	<div class="col" style="border:0.35px solid black;height:69px;"></div>
+	</div>
+	<div class="col-sm-6" style="border:0.35px solid black;height:65px;">
+	</div>
 	</div>
 	</td>
 	
-	
-	</tr>	
+</tr>	
 	
 </table>
 
-	</div>  
-		<div>
+</div> 
+
+		<div style="border:2px solid black;border-top:0px;margin-left:-340px;width:1500px;background-color:ghostwhite;">
 			<br/>
 	<br/>
 	
-<div class="row"  style="margin-left:-100px;">
+<div class="row"  style="margin-left:50px;">
 <div class="col">
 <b>.................................</b>
 <br/>
@@ -367,7 +376,20 @@ Head of the Department
 Head of the Institute
 </div>
 </div>	</div>
+
+ 
+
 	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<br/>
 	<br/>
