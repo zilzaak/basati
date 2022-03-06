@@ -247,10 +247,9 @@ return new ResponseEntity<Admin>(forgot,HttpStatus.OK);
 	
 	public String subjective() {
 	
-		return "allresult";
+		return "subjective";
 		
-	}
-	
+	}	
 	
 	@RequestMapping("/allresult2")
 	
