@@ -175,7 +175,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	</div>	
 	
 	
-<div class="row" style="margin-top:70px;">
+<div class="row" style="margin-top:80px;">
 <div class="col">
 <b>.....................</b>
 <br/>
