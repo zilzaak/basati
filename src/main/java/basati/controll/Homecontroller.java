@@ -243,6 +243,14 @@ return new ResponseEntity<Admin>(forgot,HttpStatus.OK);
 		
 	}	
 	
+	@RequestMapping("/subjective")
+	
+	public String subjective() {
+	
+		return "allresult";
+		
+	}
+	
 	
 	@RequestMapping("/allresult2")
 	
