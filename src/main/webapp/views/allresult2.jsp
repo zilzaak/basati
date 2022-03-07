@@ -139,7 +139,11 @@ wrap-word:break-word;
   padding:0px;
 }
 
+b{
 
+font-size:1.2em;
+
+}
 
 
 
@@ -169,7 +173,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <div class="row" align="center">
 <div class="col"><b>Technology :</b> <b ng-if="checkdept(allres[0].rst.dept)=='com'">Computer(66)</b><b ng-if="checkdept(allres[0].rst.dept)=='civ'">Civil(64)</b>
 	<b ng-if="checkdept(allres[0].rst.dept)=='et'">Electrical(67)</b><br/>
-<b>Institute Name: Badiul Alam Science and Technology Institute</b>
+<b>Institute Name: Badiul Alam Science and Technology Institute(64041)</b>
 </div>
 <div class="col">
 <b>{{allres[0].rst.semester}} Semester Examination( {{allres[0].dps[0].duration}})</b> <br/>
@@ -187,8 +191,8 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<th ng-if="$index==0" style="padding-left:15px;padding-right:15px;" >
 	
 	<div class="row">
-	<div style="border:1px solid black;" class="col" ng-repeat=" dp in x.dps" >
-	{{dp.subname}}({{dp.subcode}}) 
+	<div style="border:1px solid black;" class="col" ng-repeat="dp in x.dps" >
+	{{dp.subname}} ({{dp.subcode}}) 
 	</div>
 	</div>
 </th>
@@ -197,17 +201,12 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	</tr>
 	
 	
-	
-	
-	
-	
-	
 	<tr ng-repeat="x in allres">
 	<td ng-if="$index==0">SL<br/>
 	NO</td>
 	<td ng-if="$index==0">
-	<b>roll no</b> <br/>
-	<b>reg no</b>
+	<b>Roll no</b> <br/>
+	<b>Reg no</b>
 </td>
 	<td ng-if="$index==0"><b>Name of</b><br/>
 	<b>the students</b></td>
@@ -247,7 +246,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 leter <br/>
 grade
 </div>
-   <div class="col-sm-6" style="border:1px solid black;padding-left:0px;height:89px;"><br/>status</div>
+   <div class="col-sm-6" style="border:1px solid black;padding-left:0px;height:89px;"><br/>Status</div>
 	</div>
 	</td>
 	
@@ -286,15 +285,15 @@ grade
 	<div   class="col"  ng-repeat="dp1 in ps.dps">
 		<div class="row">
 		
-		<div class="col" style="border:0.45px solid black;height:36px;">{{dp1.tc}}</div>
-		<div class="col" style="border:0.45px solid black;height:36px;">{{dp1.tf}}</div>
+		<div class="col" style="border:0.45px solid black;height:42px;">{{dp1.tc}}</div>
+		<div class="col" style="border:0.45px solid black;height:42px;">{{dp1.tf}}</div>
 		
-		<div class="col" style="border:0.45px solid black;text-align:center;height:36px;">
-	<div style="border:0.33px solid black;padding-left:10px;height:18px;" class="row">
-	{{dp1.total}} 
+		<div class="col" style="border:0.45px solid black;text-align:center;height:42px;">
+	<div style="border:0.33px solid black;padding-left:10px;height:45%;" class="row">
+	{{dp1.total}} <br/>
 	</div>	
-	<div style="border:0.30px solid black;padding-left:10px;height:18px;" class="row">
-	{{dp1.gradepoint}}
+	<div style="border:0.30px solid black;padding-left:10px;height:55%;" class="row">
+	{{dp1.gradepoint}} <br/>
 	</div>
 	</div>
 	
