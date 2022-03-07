@@ -121,8 +121,10 @@ $scope.checkdept=function(t){
 <style>
 h2,h3,h4{
 word-spacing:10px;
+
 }
 table th,td{
+wrap-word:break-word;
 padding:8px;
 }
 </style>
@@ -144,6 +146,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<div class="container" style="background-color:ghostwhite;margin:50px;margin-left:30px;border:2px solid black;" align="center">
 		<br/>
 	<br/>
+	
 	<h2 >Badiul Alam Science And Technology Institute</h2>
 	<h3 >Kasba , Brahmanbaria</h3>
 	<h3>Result of {{p.semester}} Semester , Session-{{p.session}}</h3>
