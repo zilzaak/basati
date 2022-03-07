@@ -21,6 +21,7 @@
 
 var module=angular.module("arapp",[]);
 module.controller("ar",function($scope,$http){
+	$scope.subval={"tc":null,"tf":null,"pc":null,"pf":null};
 	
 	$scope.sch=['2010-11','2011-12','2012-13','2013-14','2014-15','2015-16','2016-17','2017-18','2018-19','2019-20','2020-21',
 		'2021-22','2022-23','2023-24','2024-25','2025-26','2026-27','2027-28','2028-29','2029-30','2030-31','2031-32','2032-33','2033-34'];
@@ -120,7 +121,7 @@ $scope.checkdept=function(t){
 
 <style>
 table th,td{
-padding:8px;
+wrap-word:break-word;
 }
 </style>
 
@@ -138,7 +139,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	 
 	   
 
-	<div class="container" style="background-color:ghostwhite;margin:50px;margin-left:30px;border:2px solid black;" align="center">
+	<div class="container" style="background-color:ghostwhite;margin:50px;margin-left:30px;border:2px solid black;margin-top:20px;" align="center">
 	<br/>
 	<h1>Badiul Alam Science And Technology Institute</h1>
 	<h4>Kasba , Brahmanbaria</h4>
@@ -146,21 +147,21 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<br/>
 	
 	<div style="border-radius:8px;border:2px solid black;width:42%;" align="center"><h2>TC,TF,PC,PF Marks Sheet</h2></div>
-	
-	<div class="row" style="padding:8px;">
+	<br/>
+	<div class="row" style="padding:8px;margin-left:20px;margin-right:20px;">
 	<div class="col" style="text-align:left;">
-	<h4>Subject Name : </h4>
+	<h4>Subject Name : {{allres[0].subname}}</h4>
 	</div>
 	
 	<div class="col" style="text-align:right;">
-	<h4>Subject Code : </h4>
+	<h4>Subject Code :{{allres[0].subcode}} </h4>
 	</div>
 	</div>
 	
-		<div class="row" style="padding:8px;">
+		<div class="row" style="padding:8px;margin-left:20px;margin-right:20px;">
+		
 	<div class="col" style="text-align:left;">
-	<h4>Technology:</h4><b ng-if="checkdept(p.dept)=='com'">Computer</b><b ng-if="checkdept(p.dept)=='civ'">Civil</b>
-	<b ng-if="checkdept(p.dept)=='et'">Electrical</b>
+	<h4>Technology:<b ng-if="checkdept(p.dept)=='com'">Computer</b><b ng-if="checkdept(p.dept)=='civ'">Civil</b><b ng-if="checkdept(p.dept)=='et'">Electrical</b></h4>
 	</div>
 	
 	<div class="col">
@@ -168,32 +169,91 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	</div>
 	
 		<div class="col" style="text-align:right;">
-	<h4>Session :  {{p.session}}</h4>
+	<h4>Session : {{p.session}}</h4>
 	</div>
 	
 	</div>
 	
+	<div class="html-content" style="padding:50px;text-align:center;height:960px;">
 	
-
-
-<div class="html-content" style="padding:50px;text-align:center;height:1100px;">
-	
-<table border="1" align="center" ng-if="allres.length!=0" style="font-size:1.3em;font-weight:500;width:97%;">
+<table border="1" align="center" ng-if="allres.length!=0" style="font-size:1em;font-weight:500;">
 	
 	<tr>
-	<th>SL NO</th>
-	<th>STUDENT NAME</th>
-	<th>ROLL NO</th>
-	<th>REG NO</th>
-	<th>GPA</th>
-	</tr>
+	<th style="width:15px;">SL NO</th>
+	<th style="width:290px;">Name of the students</th>
+	<th style="height:80px;">
+
+<div class="col" style="border:1px solid black;margin-left:0.50px;margin-right:0.50px;height:100%;">
+Board
+<div class="row" style="height:50%;margin-top:17px;">
+<div class="col" style="border:1px solid black;">Roll No</div>
+<div class="col" style="border:1px solid black;">Reg.No</div>
+</div>
+</div>	
+	</th>
+
+<th style="width:450px;">
+<div class="row" style="border:1px solid black;margin-left:0.50px;margin-right:0.50px;text-align:center;padding-left:110px;">
+Marks
+</div>
+
+
+<div class="row" style="border:1px solid black;margin-left:0.50px;margin-right:0.50px;">
+<div class="col-sm-5" style="border:1px solid black;">
+Theory
+<div class="row" style="border:1px solid black;">
+<div style="border:1px solid black;width:50%;" >TC-{{subval.tc}}</div><div style="border:1px solid black;width:50%;">TF-{{subval.tf}}</div>
+</div>
+
+</div>
+
+<div class="col-sm-5" style="border:1px solid black;">
+Practical
+<div class="row" style="border:1px solid black;">
+<div style="border:1px solid black;width:50%;" >PC-{{subval.pc}}</div><div style="border:1px solid black;width:50%;">PF-{{subval.pf}}</div>
+</div>
+
+</div>
+<div class="col-sm-2" style="border:1px solid black;">Total</div>
+</div>
+
+
+</th>
+</tr>
 	
-	<tr ng-repeat="x in allres">
-	<td>{{$index+fromr}}
+<tr ng-repeat="x in allres">
+	<td>{{$index+fromr}}</td>
 	<td>{{x.name}}</td>
-	<td>{{x.roll}}</td>
-	<td>{{x.regno}}</td>
-	<td>{{x.gpa}}</td>
+	
+	<td style="width:345px;height:40px;">
+	
+<div class="row" style="height:100%;order:1px solid black;margin-left:0.50px;margin-right:0.50px;">
+<div class="col" style="border:1px solid black;">{{x.rollno}}</div>
+<div class="col" style="border:1px solid black;">{{x.regno}}</div>
+</div>
+	
+</td>
+
+
+	<td>
+	
+<div class="row" style="border:1px solid black;margin-left:0.50px;margin-right:0.50px;">
+<div class="col-sm-5" style="border:1px solid black;">
+<div class="row" style="border:1px solid black;">
+<div style="border:1px solid black;width:50%;" >{{x.tc}}</div><div style="border:1px solid black;width:50%;">{{x.tf}}</div>
+</div>
+
+</div>
+
+<div class="col-sm-5" style="border:1px solid black;">
+<div class="row" style="border:1px solid black;">
+<div style="border:1px solid black;width:50%;" >{{x.pc}}</div><div style="border:1px solid black;width:50%;">{{x.pf}}</div>
+</div>
+
+</div>
+<div class="col-sm-2" style="border:1px solid black;">{{x.total}}</div>
+</div>
+	</td>
 	</tr>
 	
 	</table>
@@ -201,20 +261,19 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 
 	</div>	
 	
-	
 <div class="row" style="margin-top:80px;">
 <div class="col">
-<b>.....................</b>
+<b>...............................................</b>
 <br/>
-Prepared By
+SUBJECT TEACHER NAME & SIG
 </div>
 <div class="col">
-<b>....................</b><br/>
-Head of the dept
+<b>................................</b><br/>
+HEAD OF THE DEPT
 </div>
 <div class="col">
-<b>...............</b><br/>
-Principal
+<b>...................</b><br/>
+PRINCIPAL
 </div>
 </div>	
 
@@ -249,13 +308,32 @@ Principal
 			<br/>
 <button ng-click="getall();" class="btn btn-sm btn-success" style="margin-left:2%;">submit</button> <button class="btn btn-sm btn-dark" style="margin-left:100px;"ng-click="hidesh()">hide this part</button>
 
+
 		  	</div> 
 		  	
+		  	
+		  	
+		    	
 		  	<div class="col col-md-6" style="background-color:white;padding:20px;">
 		  	<h4>Total number of students: </h4><b>{{totalr}}</b>
 		  	<br/>
-		  <b>SL NO is from:</b> <input type="number" ng-model="fromr"/>	<b> <br/>
-		  to SL NO:</b><input type="number" ng-model="tor"/>  	<button class="btn btn-success btn-sm" ng-click="filtrecord()">submit</button>
+		  <b>SL NO is from:</b> <input style="width:80px;" type="number" ng-model="fromr"/><b> 
+		  to SL NO:</b><input style="width:80px;" type="number" ng-model="tor"/>  	<button class="btn btn-success btn-sm" ng-click="filtrecord()">submit</button>
+		  
+		  <br/>
+		  <br/>
+		  
+<table border="1" style="margin-left:116px;">
+<tr>
+<th>TC</th><th>TF</th><th>PC</th><th>PF</th>
+</tr>
+<tr>
+<td><input type="number" ng-model="subval.tc" style="width:80px;" /></td>
+<td><input type="number" ng-model="subval.tf" style="width:80px;" /></td>
+<td><input type="number" ng-model="subval.pc" style="width:80px;" /></td>
+<td><input type="number" ng-model="subval.pf" style="width:80px;" /></td>
+</tr>
+</table>
 		  	</div>
 	
 
