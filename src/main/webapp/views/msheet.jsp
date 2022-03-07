@@ -69,10 +69,10 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <div class="col-md-1" style="text-align:left;">
 <img id="im"  src="<c:url value="/static/theme/basati.jpg" />"  style="width:100px;height:100px;" /> 
 </div>
-<div class="col-md-11" style="text-align:left;"> 
-<b style="font-size:1.8em;margin-left:22px;color:darkblue;font-family:monotype corsiva;">BADIUL ALAM SCIENCE AND TECHNOLOGY INSTITUTE</b> <br/>
-<b style="font-size:1.6em;margin-left:255px;color:darkblue;font-weight:200px;font-family:monotype corsiva;">Kasba , Brahmanbaria</b> <br/>
- <b style="font-size:1.6em;margin-left:300px;color:darkblue;font-weight:200px;font-family:monotype corsiva;">Estd. : 2010</b>
+<div class="col-md-11" style="text-align:left;line-height:2em;"> 
+<b style="font-size:1.8em;margin-left:22px;color:darkblue;font-family:monotype corsiva;">BADIUL ALAM SCIENCE AND TECHNOLOGY INSTITUTE</b>
+<b style="font-size:1.6em;margin-left:255px;color:darkblue;font-weight:200px;margin-top:0px;font-family:monotype corsiva;">Kasba , Brahmanbaria</b>
+ <b style="font-size:1.6em;margin-left:300px;color:darkblue;margin-top:0px;font-weight:200px;font-family:monotype corsiva;">Estd. : 2010</b>
 </div>
 </div>
 </li>
@@ -85,7 +85,6 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <li><b style="line-height:0.5;font-size:1.3em;">(Held in The Month of ${hp.dps[0].duration} )</b></li>
 </ul>
 </div>
-
 
 <br/> 
 <br/>
