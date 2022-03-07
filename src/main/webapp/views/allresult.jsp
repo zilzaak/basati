@@ -119,6 +119,9 @@ $scope.checkdept=function(t){
 
 
 <style>
+h2,h3,h4{
+word-spacing:10px;
+}
 table th,td{
 padding:8px;
 }
@@ -141,17 +144,17 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<div class="container" style="background-color:ghostwhite;margin:50px;margin-left:30px;border:2px solid black;" align="center">
 		<br/>
 	<br/>
-	<h4>Badiul Alam Science And Technology Institute</h4>
-	<h4>Kasba , Brahmanbaria</h4>
-	<h4>Result of {{p.semester}} Semester , Session-{{p.session}}</h4>
-	<h4>Technology : <b ng-if="checkdept(p.dept)=='com'">Computer</b><b ng-if="checkdept(p.dept)=='civ'">Civil</b>
-	<b ng-if="checkdept(p.dept)=='et'">Electrical</b></h4>
+	<h2 >Badiul Alam Science And Technology Institute</h2>
+	<h3 >Kasba , Brahmanbaria</h3>
+	<h3>Result of {{p.semester}} Semester , Session-{{p.session}}</h3>
+	<h3>Technology: <b ng-if="checkdept(p.dept)=='com'">Computer</b><b ng-if="checkdept(p.dept)=='civ'">Civil</b>
+	<b ng-if="checkdept(p.dept)=='et'">Electrical</b></h3>
 
 
 	<div class="html-content" style="padding:50px;text-align:center;height:1100px;">
 	
 
-	<table border="1" align="center" ng-if="allres.length!=0" style="font-size:1.3em;font-weight:500;width:90%;">
+	<table border="1" align="center" ng-if="allres.length!=0" style="font-size:1.3em;font-weight:500;width:97%;">
 	
 	<tr>
 	<th>SL NO</th>
