@@ -357,22 +357,22 @@ grade
 <div class="col">
 <b>.................................</b>
 <br/>
-      <p style="margin-left:26px;"> Prepared By</p>
+      <p style="margin-left:35px;"> Prepared By</p>
 </div>
 
 <div class="col">
 <b>................................</b><br/>
-     <p style="margin-left:20px;"> Compared by</p>
+     <p style="margin-left:30px;"> Compared by</p>
 </div>
 
 
 <div class="col">
 <b style="margin-left:12px;">..................................</b><br/>
-Head of the Department
+<p style="margin-left:20px;">Head of the Department</p>
 </div>
 <div class="col">
 <b style="margin-left:7px;">..............................</b><br/>
-Head of the Institute
+<p style="margin-left:17px;">Head of the Institute</p>
 </div>
 </div>	</div>
 
