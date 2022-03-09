@@ -57,4 +57,7 @@ public interface Departmentrepo extends JpaRepository<Department,Integer> {
 	public boolean existsBySessionAndDeptAndSemesterAndRegnoAndSubcode(String session, String dept, String semester,
 			String regno, String subcode);
 
+	public boolean existsBySessionAndDeptAndSemesterAndRegno(String session, String dept, String semester,
+			String studentname, String regno);
+
 }
