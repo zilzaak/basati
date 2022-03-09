@@ -66,9 +66,6 @@ public boolean checkunique(Department d) {
 			return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);
 		}
 		
-		
-		
-		
 		if(drr.count()<1) {
                 drr.saveAll(record);
 				record.get(0).setStringdate("successfully added unique record");	
@@ -90,44 +87,8 @@ public boolean checkunique(Department d) {
 		}
 			
 			
-			
-			
-			
 		for(Department d : record) {
-		List<Department> lstr =drr.findBySessionAndDeptAndSemesterAndRollno(d.getSession(),
-				d.getDept(),d.getSemester(),d.getRollno());	
-		if(!lstr.isEmpty()) {
-			if(!d.getStudentname().contentEquals(lstr.get(0).getStudentname())) {
-				String f="student name of roll no "+d.getRollno()+" should be "+lstr.get(0).getStudentname()+" edit please ";
-				record.get(0).setStringdate(f);
-				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);	
-			}
-			if( !d.getRegno().contentEquals(lstr.get(0).getRegno())) {
-				String f=" reg no of "+d.getStudentname()+" should be "+lstr.get(0).getRegno()+" edit please ";
-				record.get(0).setStringdate(f);
-				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);	
-			}
-		}
-		
-		List<Department> lt =drr.findBySessionAndDeptAndSemesterAndRegno(d.getSession(),
-				d.getDept(),d.getSemester(),d.getRegno());	
-		
-		if(!lt.isEmpty()) {
-			if(!d.getStudentname().contentEquals(lt.get(0).getStudentname())) {
-				String f="student name of reg no "+d.getRegno()+" should be "+lt.get(0).getStudentname()+" edit please ";
-				record.get(0).setStringdate(f);
-				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);	
-			}
-			if( !d.getRegno().contentEquals(lt.get(0).getRegno())) {
-				String f=" roll no of "+d.getStudentname()+" should be "+lt.get(0).getRollno()+" edit please ";
-				record.get(0).setStringdate(f);
-				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);	
-			}
-		}
-		
-		
-		
-		if(!lst.isEmpty()) {
+			
 			if(!lst.get(0).getSubname().contentEquals(d.getSubname())) {
 							String x="subject name "+d.getSubname()+" do not match for subject code "+d.getSubcode()+" change it to "+lst.get(0).getSubname()+",";
 				record.get(0).setStringdate(x);
@@ -144,19 +105,11 @@ public boolean checkunique(Department d) {
 				record.get(0).setStringdate(z);
 				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);
 			}
-					}	
-		
-		
-	
-		
-		
+					
 		}
 		
 		
-			
-
-
-String sms="";	
+			String sms="";	
 		
 		
 		for(Department d : record) {		
@@ -266,8 +219,8 @@ String sms="";
 	  
 	  
 	  if(!dp.getStudentname().contentEquals(chng.getStudentname())) {
-List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(
-		chng.getSession(),chng.getDept(),chng.getSemester(),chng.getStudentname(),chng.getRollno(),chng.getRegno());
+List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollnoAndRegno(
+		chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno(),chng.getRegno());
 		for(Department dk : lst) {
 			dk.setStudentname(dp.getStudentname());
 		drr.save(dk);
@@ -276,14 +229,11 @@ List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoA
 		
 		  }
 	  
-	  
-	  chng=drr.findById(dp.getDid()).get();
-	  
-	  
+	  	  
 	  if(!dp.getRollno().contentEquals(chng.getRollno())) {
 		  	if(!drr.existsBySessionAndDeptAndSemesterAndRollno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRollno())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(
-	chng.getSession(),chng.getDept(),chng.getSemester(),chng.getStudentname(),chng.getRollno(),chng.getRegno());
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollnoAndRegno(
+	chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno(),chng.getRegno());
 		
 		for(Department dk : lst) {
 		dk.setRollno(dp.getRollno());
@@ -309,8 +259,8 @@ List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoA
 	  if(!dp.getRegno().contentEquals(chng.getRegno())) {
 		  
 	if(!drr.existsBySessionAndDeptAndSemesterAndRegno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRegno())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(
-				chng.getSession(),chng.getDept(),chng.getSemester(),chng.getStudentname(),chng.getRollno(),chng.getRegno());
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollnoAndRegno(
+				chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno(),chng.getRegno());
 		
 		for(Department dk : lst) {
 			dk.setRegno(dp.getRegno());
@@ -503,7 +453,7 @@ sms=sms+" these record has duplicate roll no for same student for same dept,seme
 		boolean x=false;
 		int count=0;
 		for(Department b : lst2) {
-if(b.getDept().contentEquals(p.getDept()) && b.getSemester().contentEquals(p.getSemester()) 
+if(b.getSession().contentEquals(p.getSession()) && b.getDept().contentEquals(p.getDept()) && b.getSemester().contentEquals(p.getSemester()) 
 		&& b.getSubcode().contentEquals(p.getSubcode()) && b.getRollno().contentEquals(p.getRollno())) {
 	count++;
 }
