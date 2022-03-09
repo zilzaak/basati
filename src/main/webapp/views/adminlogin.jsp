@@ -114,13 +114,13 @@ if(se=="n"){
 $scope.checkpass1=function(){
 	var x = $scope.reg.password.length;
 	
-		if(x<4){
-		document.getElementById("pm1").innerHTML="need minimum 4 character";	
+		if(x<7){
+		document.getElementById("pm1").innerHTML="need minimum 6 character";	
 		document.getElementById("pm1").style.color="red";
 		ep1="y"
 	}	
 		
-		if(x>3){
+		if(x>5){
 			document.getElementById("pm1").innerHTML="valid length";
 			document.getElementById("pm1").style.color="green";
 			ep1="n"
@@ -154,9 +154,9 @@ if($scope.confirm==$scope.reg.password)	{
 			ep2="y"	
 		}	
 		
-		if(x<4)	{
+		if(x<7)	{
 			
-			document.getElementById("pm2").innerHTML="need minimum 4 character";	
+			document.getElementById("pm2").innerHTML="need minimum 6 character";	
 			document.getElementById("pm2").style.color="red";
 			ep2="y"	
 		}	
