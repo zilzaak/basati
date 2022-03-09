@@ -89,6 +89,11 @@ public boolean checkunique(Department d) {
 				record.get(0).setStringdate(f);
 				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);	
 			}
+			if( !d.getRegno().contentEquals(lstr.get(0).getRegno())) {
+				String f=" reg no of "+d.getStudentname()+" should be "+lstr.get(0).getRegno()+" edit please ";
+				record.get(0).setStringdate(f);
+				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);	
+			}
 		}
 		
 		if(!lst.isEmpty()) {
