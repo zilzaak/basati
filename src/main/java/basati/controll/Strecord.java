@@ -249,7 +249,7 @@ public boolean checkunique(Department d) {
 		  	
 		else {
 			
-			sms=sms+" duplicate roll no , can not update , ";
+			sms=sms+" this roll no belongs to another student edit or delete that other wise can not update, ";
 			System.out.println("sorry duplicate roll no found");
 		}
 		
