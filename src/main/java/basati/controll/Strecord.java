@@ -109,6 +109,24 @@ public boolean checkunique(Department d) {
 			}
 		}
 		
+		List<Department> lt =drr.findBySessionAndDeptAndSemesterAndRegno(d.getSession(),
+				d.getDept(),d.getSemester(),d.getRegno());	
+		
+		if(!lt.isEmpty()) {
+			if(!d.getStudentname().contentEquals(lt.get(0).getStudentname())) {
+				String f="student name of reg no "+d.getRegno()+" should be "+lt.get(0).getStudentname()+" edit please ";
+				record.get(0).setStringdate(f);
+				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);	
+			}
+			if( !d.getRegno().contentEquals(lt.get(0).getRegno())) {
+				String f=" roll no of "+d.getStudentname()+" should be "+lt.get(0).getRollno()+" edit please ";
+				record.get(0).setStringdate(f);
+				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);	
+			}
+		}
+		
+		
+		
 		if(!lst.isEmpty()) {
 			if(!lst.get(0).getSubname().contentEquals(d.getSubname())) {
 							String x="subject name "+d.getSubname()+" do not match for subject code "+d.getSubcode()+" change it to "+lst.get(0).getSubname()+",";
@@ -126,17 +144,19 @@ public boolean checkunique(Department d) {
 				record.get(0).setStringdate(z);
 				return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);
 			}
-					}
+					}	
 		
-	}
 		
-
-
-	
 	
 		
 		
-	String sms="";	
+		}
+		
+		
+			
+
+
+String sms="";	
 		
 		
 		for(Department d : record) {		
@@ -165,7 +185,7 @@ public boolean checkunique(Department d) {
 		
 	}
 	
-	
+
 	
 	@PostMapping("/filtstudent")
 	public ResponseEntity<List<Department>> filtstudent(@RequestBody Department d){
@@ -246,7 +266,8 @@ public boolean checkunique(Department d) {
 	  
 	  
 	  if(!dp.getStudentname().contentEquals(chng.getStudentname())) {
-		  List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno());
+List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(
+		chng.getSession(),chng.getDept(),chng.getSemester(),chng.getStudentname(),chng.getRollno(),chng.getRegno());
 		for(Department dk : lst) {
 			dk.setStudentname(dp.getStudentname());
 		drr.save(dk);
@@ -256,12 +277,14 @@ public boolean checkunique(Department d) {
 		  }
 	  
 	  
-	  
+	  chng=drr.findById(dp.getDid()).get();
 	  
 	  
 	  if(!dp.getRollno().contentEquals(chng.getRollno())) {
 		  	if(!drr.existsBySessionAndDeptAndSemesterAndRollno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRollno())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno());
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(
+	chng.getSession(),chng.getDept(),chng.getSemester(),chng.getStudentname(),chng.getRollno(),chng.getRegno());
+		
 		for(Department dk : lst) {
 		dk.setRollno(dp.getRollno());
 		   drr.save(dk);
@@ -270,18 +293,25 @@ public boolean checkunique(Department d) {
 		}
 		  	
 		else {
-			Department fr=drr.findBySessionAndDeptAndSemesterAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno()).get(0);
-			sms=sms+" this roll no belongs to"+fr.getStudentname()+"edit or delete that other wise can not update, ";
+	Department fr=drr.findBySessionAndDeptAndSemesterAndRollno(
+	dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRollno()).get(0);
+			sms=sms+" this roll no belongs to "+fr.getStudentname()+"edit or delete that otherwise can not update, ";
 			System.out.println("sorry duplicate roll no found");
+			dp.setStudentname(sms);
+		return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
 		  
 	  }
 	 
+	  chng=drr.findById(dp.getDid()).get();
+	  
 	  if(!dp.getRegno().contentEquals(chng.getRegno())) {
 		  
 	if(!drr.existsBySessionAndDeptAndSemesterAndRegno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRegno())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRegno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRegno());
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(
+				chng.getSession(),chng.getDept(),chng.getSemester(),chng.getStudentname(),chng.getRollno(),chng.getRegno());
+		
 		for(Department dk : lst) {
 			dk.setRegno(dp.getRegno());
 			drr.save(dk);
@@ -291,10 +321,11 @@ public boolean checkunique(Department d) {
 		  
 	else {
 		
-		Department fr=drr.findBySessionAndDeptAndSemesterAndRegno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRegno()).get(0);
-		sms=sms+" this reg no belongs to"+fr.getStudentname()+" edit or delete that other wise can not update, ";	
-		
-		
+		Department fr=drr.findBySessionAndDeptAndSemesterAndRegno(
+				dp.getSession(),dp.getDept(),chng.getSemester(),dp.getRegno()).get(0);
+		sms=sms+" this reg no belongs to "+fr.getStudentname()+" edit or delete that otherwise can not update, ";	
+		dp.setStudentname(sms);
+	return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 	}
 		  }
 	  
@@ -320,7 +351,7 @@ public boolean checkunique(Department d) {
 			dp.setGradepoint((float) 4.00);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
@@ -329,7 +360,7 @@ public boolean checkunique(Department d) {
 			dp.setGradepoint((float) 3.75);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
@@ -338,7 +369,7 @@ public boolean checkunique(Department d) {
 			dp.setGradepoint((float) 3.50);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		if(65<=mark && mark<70) {
@@ -346,7 +377,7 @@ public boolean checkunique(Department d) {
 			dp.setGradepoint((float) 3.25);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		if(60<=mark && mark<65) {
@@ -354,7 +385,7 @@ public boolean checkunique(Department d) {
 			dp.setGradepoint((float) 3.00);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		if(55<=mark && mark<60) {
@@ -362,7 +393,7 @@ public boolean checkunique(Department d) {
 			dp.setGradepoint((float) 2.75);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		if(50<=mark && mark<55) {
@@ -370,7 +401,7 @@ public boolean checkunique(Department d) {
 			dp.setGradepoint((float) 2.50);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		if(45<=mark && mark<50) {
@@ -378,16 +409,16 @@ public boolean checkunique(Department d) {
 			dp.setGradepoint((float) 2.25);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
 		if(40<=mark && mark<45) {
 			dp.setGrade("D");
 			dp.setGradepoint((float) 2.00);
-			drr.save(dp);
+			dp.setStudentname("successfully updated");
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
@@ -396,13 +427,13 @@ public boolean checkunique(Department d) {
 			dp.setGradepoint((float) 0.0);
 			drr.save(dp);
 			System.out.println("the obtained mark in total is"+obtain+"  mark is in percent is "+mark+" FULL MARK IS "+dp.getFullmark());
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 			return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		}
 		
 	} 
 			
-			dp.setStudentname(sms);
+			dp.setStudentname("successfully updated");
 		return new  ResponseEntity<Department>(dp,HttpStatus.OK);
 		
 	}	
