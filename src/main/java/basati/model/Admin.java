@@ -1,9 +1,13 @@
 package basati.model;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+
 
 @Table
 @Entity
@@ -12,7 +16,10 @@ public class Admin {
 	private int aid;
 	private String email;
 	private String password;
+	
+	
 	private String code;
+	
 	@Id
 	@GeneratedValue
 	public int getAid() {
