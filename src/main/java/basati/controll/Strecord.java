@@ -228,13 +228,17 @@ public boolean checkunique(Department d) {
 	  
 	  
 	  if(!dp.getStudentname().contentEquals(chng.getStudentname())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno());
+		  List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno());
 		for(Department dk : lst) {
 			dk.setStudentname(dp.getStudentname());
 		drr.save(dk);
 			System.out.println("updating student name for name:"+dk.getStudentname());
 		}
+		
 		  }
+	  
+	  
+	  
 	  
 	  
 	  if(!dp.getRollno().contentEquals(chng.getRollno())) {
@@ -248,8 +252,8 @@ public boolean checkunique(Department d) {
 		}
 		  	
 		else {
-			
-			sms=sms+" this roll no belongs to another student edit or delete that other wise can not update, ";
+			Department fr=drr.findBySessionAndDeptAndSemesterAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno()).get(0);
+			sms=sms+" this roll no belongs to"+fr.getStudentname()+"edit or delete that other wise can not update, ";
 			System.out.println("sorry duplicate roll no found");
 		}
 		
@@ -269,7 +273,10 @@ public boolean checkunique(Department d) {
 		  
 	else {
 		
-		sms=sms+" this reg no belongs to another student edit that other wise can not update, ";	
+		Department fr=drr.findBySessionAndDeptAndSemesterAndRegno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRegno()).get(0);
+		sms=sms+" this reg no belongs to"+fr.getStudentname()+" edit or delete that other wise can not update, ";	
+		
+		
 	}
 		  }
 	  
@@ -386,7 +393,6 @@ public boolean checkunique(Department d) {
 
 	@PostMapping("/submark")
 	public ResponseEntity<List<Department>> filtstudent(@RequestBody List<Department> lst) throws ParseException{
-	 
 		
 	lst2=lst;
 String sms="";
