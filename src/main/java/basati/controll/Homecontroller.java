@@ -440,8 +440,11 @@ return new ResponseEntity<Admin>(user,HttpStatus.OK);
 
 @PostMapping("/regfinal")
 public ResponseEntity<Admin> finalreg(@RequestBody Admin user,HttpSession session){
+	
+	
 	Adminmail adm = mrr.findAll().get(0);
 String rancode = (String) session.getAttribute("codertu");
+
 if(user.getCode().contentEquals(rancode)) {
 amr.save(user);
 String sms="successfully registered , your email:"+user.getEmail()+"login password: "+user.getPassword();
