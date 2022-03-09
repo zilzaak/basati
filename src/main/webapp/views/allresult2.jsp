@@ -256,8 +256,8 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<div class="col-sm-6" style="border:1px solid black;padding-left:0px;height:89px;">
 	GPA
 <br/> 
-leter <br/>
-grade
+LETTER <br/>
+GRADE
 </div>
    <div class="col-sm-6" style="border:1px solid black;padding-left:0px;height:89px;"><br/>Status</div>
 	</div>
