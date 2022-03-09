@@ -85,6 +85,12 @@ public boolean checkunique(Department d) {
 	return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);		
 			
 		}
+		
+		
+		
+		
+		
+		
 			
 			
 		for(Department d : record) {
