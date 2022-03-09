@@ -238,9 +238,8 @@ public boolean checkunique(Department d) {
 	  
 	  
 	  if(!dp.getRollno().contentEquals(chng.getRollno())) {
-		  	if(!drr.existsBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getStudentname(),dp.getRollno(),dp.getRegno())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(chng.getSession(),chng.getDept(),chng.getSemester(),
-				chng.getStudentname(),chng.getRollno(),chng.getRegno());
+		  	if(!drr.existsBySessionAndDeptAndSemesterAndRollno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRollno())) {
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRollno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRollno());
 		for(Department dk : lst) {
 		dk.setRollno(dp.getRollno());
 		   drr.save(dk);
@@ -249,6 +248,7 @@ public boolean checkunique(Department d) {
 		}
 		  	
 		else {
+			
 			sms=sms+" duplicate roll no , can not update , ";
 			System.out.println("sorry duplicate roll no found");
 		}
@@ -257,15 +257,29 @@ public boolean checkunique(Department d) {
 	  }
 	 
 	  if(!dp.getRegno().contentEquals(chng.getRegno())) {
+		  
+	if(!drr.existsBySessionAndDeptAndSemesterAndRegno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getStudentname(),dp.getRegno())) {
 		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(chng.getSession(),chng.getDept(),
 				chng.getSemester(),chng.getStudentname(),chng.getRollno(),chng.getRegno());
 		for(Department dk : lst) {
 			dk.setRegno(dp.getRegno());
 			drr.save(dk);
 			System.out.println("updating the reg no for name:"+dk.getStudentname());
-				}
-	
-	  }
+				}	
+	}
+		  
+	else {
+		
+		sms=sms+" this reg no belongs to another student edit that other wise can not update, ";	
+	}
+		  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 	   
 	 		if(chng!=dp || chng==null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
