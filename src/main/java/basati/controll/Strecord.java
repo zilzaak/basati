@@ -258,9 +258,8 @@ public boolean checkunique(Department d) {
 	 
 	  if(!dp.getRegno().contentEquals(chng.getRegno())) {
 		  
-	if(!drr.existsBySessionAndDeptAndSemesterAndRegno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getStudentname(),dp.getRegno())) {
-		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndStudentnameAndRollnoAndRegno(chng.getSession(),chng.getDept(),
-				chng.getSemester(),chng.getStudentname(),chng.getRollno(),chng.getRegno());
+	if(!drr.existsBySessionAndDeptAndSemesterAndRegno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRegno())) {
+		List<Department> lst=drr.findBySessionAndDeptAndSemesterAndRegno(chng.getSession(),chng.getDept(),chng.getSemester(),chng.getRegno());
 		for(Department dk : lst) {
 			dk.setRegno(dp.getRegno());
 			drr.save(dk);
@@ -276,12 +275,7 @@ public boolean checkunique(Department d) {
 	  
 	  
 	  
-	  
-	  
-	  
-	  
-	   
-	 		if(chng!=dp || chng==null) {
+	  	if(chng!=dp || chng==null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			Date dt = new Date();
 			dp.setStringdate(sdf.format(dt));
