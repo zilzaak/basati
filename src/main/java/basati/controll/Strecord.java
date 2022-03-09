@@ -76,10 +76,23 @@ public boolean checkunique(Department d) {
 					
 		}
 		
-		
+	
+			
 			List<Department> lst =drr.findBySessionAndDeptAndSemesterAndSubcodeOrderByRollnoAsc(record.get(0).getSession(),record.get(0).getDept(),
 					record.get(0).getSemester(),record.get(0).getSubcode());
 		
+		if(lst.isEmpty()) {
+			drr.saveAll(record);
+			String pm="successfully added unique record";
+			record.get(0).setStringdate(pm);
+	return new  ResponseEntity<List<Department>>(record,HttpStatus.OK);		
+			
+		}
+			
+			
+			
+			
+			
 		for(Department d : record) {
 		List<Department> lstr =drr.findBySessionAndDeptAndSemesterAndRollno(d.getSession(),
 				d.getDept(),d.getSemester(),d.getRollno());	
