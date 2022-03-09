@@ -241,11 +241,9 @@ if(x.studentname!="" && x.rollno!="" && x.regno!=""){
 		
 	        }).then(function(response){
 	        	
-	     if(response.data.studentname!=""){
-	    	 alert(response.data.studentname);
-	     }
-	     if(response.data.studentname==""){
-	    	
+
+	        	 alert(response.data.studentname);
+	        	 
 	    		$http({ 
 	    			method:"POST" , 
 	    			url:"${pageContext.request.contextPath}/filtstudent", 
@@ -255,9 +253,13 @@ if(x.studentname!="" && x.rollno!="" && x.regno!=""){
 	    		        }).then(function(response){
 	    		      
 	    		        	$scope.fdept=response.data;
-	    		        	 alert("successfully updated");
+	    		        	
 	    		        	})
-	     }
+	   
+	     
+	     
+	     
+	     
 	        	})		
 		
 	}	
