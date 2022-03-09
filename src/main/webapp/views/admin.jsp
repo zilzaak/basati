@@ -226,6 +226,13 @@ $scope.clearres=function(){
 
 $scope.getgpa=function(x){
 	
+	if(x.studentname=="" || x.rollno=="" || x.regno==""){
+		
+		alert("null value , can not update");
+	}
+
+	
+if(x.studentname!="" && x.rollno!="" && x.regno!=""){
 	$http({ 
 		method:"POST" , 
 		url:"${pageContext.request.contextPath}/makegpa", 
@@ -251,7 +258,10 @@ $scope.getgpa=function(x){
 	    		        	 alert("successfully updated");
 	    		        	})
 	     }
-	        	})	
+	        	})		
+		
+	}	
+
 	      	
 	     	
 	        	
@@ -551,6 +561,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
           <a class="dropdown-item" href="${pageContext.request.contextPath}/adminmark">result</a>
           <a class="dropdown-item" href="#" onclick="window.open('${pageContext.request.contextPath}/allresult')" >all result</a>
            <a class="dropdown-item" href="#" onclick="window.open('${pageContext.request.contextPath}/allresult2')" >Tabulation Sheet</a>
+            <a class="dropdown-item" href="#" onclick="window.open('${pageContext.request.contextPath}/subjective')" >subjective mark Sheet</a>
           </div>
        </li> 
        
