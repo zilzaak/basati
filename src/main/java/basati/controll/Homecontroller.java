@@ -556,6 +556,16 @@ return new ResponseEntity<Admin>(ad,HttpStatus.OK);
 }
 
 
+@PostMapping("/subtcpc")
+
+public ResponseEntity<List<Department>> subtcpc(@RequestBody Department dp) {
+
+	List<Department> lst = drr.findBySessionAndDeptAndSemesterAndSubcodeOrderByRollnoAsc(dp.getSession(), 
+	dp.getDept(), dp.getSemester(),dp.getSubcode());
+
+return new ResponseEntity<List<Department>>(lst,HttpStatus.OK);
+
+}
 
 
 
