@@ -118,6 +118,19 @@ $scope.checkdept=function(t){
 
 
 });
+
+
+$(document).ready(function(){
+	
+	
+$("#k").click(function(){
+	
+	$("#jk").toggle();
+	
+});
+	
+})
+
 	
 </script>
 
@@ -165,7 +178,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	 <div id="k"> 
 <div style="background-color:ghostwhite;margin-left:-340px;margin-top:120px;padding-left:15px;border:2px solid black;width:1500px;height:920px;border-bottom:0px;" >
 
-<div style="text-align:center;">
+<div style="text-align:center;" id="jk">
 <b>Bangldesh Technical Education Board , Dhaka</b> <br/>
 <b>Tabulation Sheet for Diploma-in-Engineering</b>
 </div>
