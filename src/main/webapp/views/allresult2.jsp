@@ -223,7 +223,7 @@ Students</th>
 <th ng-repeat="dp in allres[0].dps" style="width:8%;height:130px;">  
 <table border="1" style="height:100%;width:100%;">
 <tr>
-<th>TC-<br/>{{sublist[$index].tc}}</th><th>TF-<br/>{{sublist[$index].tf}}</th>
+<th style="width:31%;">TC-<br/>{{sublist[$index].tc}}</th><th style="width:31%;">TF-<br/>{{sublist[$index].tf}}</th>
 
 
 <th>
@@ -236,12 +236,12 @@ Students</th>
 
 </tr>
 <tr>
-<th>PC-<br/>{{sublist[$index].pc}}</th><th>PF-<br/>{{sublist[$index].pf}}</th><th>LETTER<br/>GRADE</th>
+<th style="width:31%;">PC-<br/>{{sublist[$index].pc}}</th><th style="width:31%;">PF-<br/>{{sublist[$index].pf}}</th><th>LETTER<br/>GRADE</th>
 </tr>
 </table>
 </th>
 
-<th style="font-size:0.60em;height:130px;width:8%;">
+<th style="height:130px;width:8%;">
 <div class="row" style="height:100%;margin-left:0.25%;margin-right:0.25%;">
 <div class="col-sm-6" style="border:1px solid black;">
 <div class="row" style="border:1px solid black;height:50%;padding-left:20%;padding-top:20%;">
@@ -254,7 +254,7 @@ GRADE<br/>
 
 </div>
 
-<div class="col-sm-6" style="border:1px solid black;padding-left:20%;padding-top:35%;">
+<div class="col-sm-6" style="border:1px solid black;font-size:0.70em;padding-top:35%;">
 STATUS
 </div>
 </div>
@@ -283,7 +283,7 @@ STATUS
 <th ng-repeat="dp1 in ps.dps" style="width:8%;height:130px;">  
 <table border="1" style="height:100%;width:100%;">
 <tr>
-<th>TC-<br/>{{dp1.tc}}</th><th>TF-<br/>{{dp1.tf}}</th>
+<th style="width:31%;">TC-<br/>{{dp1.tc}}</th><th style="width:31%;">TF-<br/>{{dp1.tf}}</th>
 
 
 <th>
@@ -296,7 +296,7 @@ STATUS
 
 </tr>
 <tr>
-<th>PC-<br/>{{dp1.pc}}</th><th>PF-<br/>{{dp1.pf}}</th><th>{{dp1.grade}}</th>
+<th style="width:31%;">PC-<br/>{{dp1.pc}}</th><th style="width:31%;">PF-<br/>{{dp1.pf}}</th><th>{{dp1.grade}}</th>
 </tr>
 </table>
 </th>
