@@ -243,7 +243,7 @@ Students</th>
 
 <th style="font-size:0.60em;height:130px;width:8%;">
 <div class="row" style="height:100%;margin-left:0.25%;margin-right:0.25%;">
-<div class="col-sm" style="border:1px solid black;">
+<div class="col-sm-6" style="border:1px solid black;">
 <div class="row" style="border:1px solid black;height:50%;padding-left:20%;padding-top:20%;">
 GPA <br/>
 </div>
@@ -254,7 +254,7 @@ GRADE<br/>
 
 </div>
 
-<div class="col-sm" style="border:1px solid black;padding-left:20%;padding-top:35%;">
+<div class="col-sm-6" style="border:1px solid black;padding-left:20%;padding-top:35%;">
 STATUS
 </div>
 </div>
@@ -301,20 +301,20 @@ STATUS
 </table>
 </th>
 
-<th style="font-size:0.60em;height:130px;width:8%;">
+<th style="height:130px;width:8%;">
 <div class="row" style="height:100%;margin-left:0.25%;margin-right:0.25%;">
-<div class="col-sm" style="border:1px solid black;">
-<div class="row" style="border:1px solid black;height:50%;padding-left:20%;padding-top:20%;">
+<div class="col-sm-6" style="border:1px solid black;">
+<div class="row" style="border:1px solid black;height:68px;padding-left:20%;padding-top:20%;">
 {{ps.rst.gpa}} <br/>
 </div>
-<div class="row" style="border:1px solid black;height:50%;padding-left:20%;padding-top:10%;">
+<div class="row" style="border:1px solid black;height:62px;padding-left:20%;padding-top:10%;">
 {{ps.rst.sms}} 
 </div>
 
 </div>
 
-<div class="col-sm" style="border:1px solid black;padding-left:20%;padding-top:35%;">
-STATUS
+<div class="col-sm-6" style="border:1px solid black;padding-top:35%;">
+
 </div>
 </div>
 </th>
