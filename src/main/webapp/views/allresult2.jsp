@@ -120,24 +120,14 @@ $scope.checkdept=function(t){
 });
 
 
-$(document).ready(function(){
-	
-	
-$("#k").click(function(){
-	
-	$("#jk").toggle();
-	
-});
-	
-})
 
-	
+
 </script>
 
 
 
 <style>
- #k{
+#k{
     transform: rotate(-90deg);
     
   }
@@ -145,11 +135,13 @@ $("#k").click(function(){
   table th{
 wrap-word:break-word;
 border-spacing:0px;
+text-align:center;
+
 }
-table td{
+table  td{
 wrap-word:break-word;
   border-spacing: 0px;
-  padding:0px;
+text-align:center;
 }
 
 b{
@@ -157,7 +149,6 @@ b{
 font-size:1.2em;
 
 }
-
 
 
 </style>
@@ -175,14 +166,13 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	   
 	   
 	   
-	 <div id="k"> 
-<div style="background-color:ghostwhite;margin-left:-340px;margin-top:120px;padding-left:15px;border:2px solid black;width:1500px;height:920px;border-bottom:0px;" >
-
-<div style="text-align:center;" id="jk">
+	
+<div id="k" style="background-color:ghostwhite;padding-left:15px;border:2px solid black;width:1570px;height:1090px;margin-left:-224px;margin-top:260px;" >
+<br/>
+<div style="text-align:center;" >
 <b>Bangldesh Technical Education Board , Dhaka</b> <br/>
 <b>Tabulation Sheet for Diploma-in-Engineering</b>
 </div>
-
 <div class="row" align="center">
 <div class="col"><b>Technology :</b> <b ng-if="checkdept(allres[0].rst.dept)=='com'">Computer(66)</b><b ng-if="checkdept(allres[0].rst.dept)=='civ'">Civil(64)</b>
 	<b ng-if="checkdept(allres[0].rst.dept)=='et'">Electrical(67)</b><br/>
@@ -195,178 +185,170 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 </div>
 <br/>
 
-<table   border="1"   ng-if="allres.length!=0" style="font-weight:500;overflow-x:auto;width:1460px;font-size:0.85em;" >
-	<tr ng-repeat="x in allres">
-	<th ng-if="$index==0">--</th>
-	<th ng-if="$index==0">--</th>
-	<th ng-if="$index==0" style="width:81px;">Subject Name and code</th>
-	
-	<th ng-if="$index==0" style="padding-left:15px;padding-right:15px;" >
-	
-	<div class="row">
-	<div style="border:1px solid black;" class="col" ng-repeat="dp in x.dps" >
-	{{dp.subname}} ({{dp.subcode}}) 
-	</div>
-	</div>
+
+
+
+<table border="1" style="font-weight:500;font-size:0.85em;">
+<tr style="height:90px;">
+<th>--</th><th>--</th><th style="width:5%;">Subject Name <br/>and Code</th>
+
+<th ng-repeat="dp in allres[0].dps" style="width:10%;">  
+<table>
+<tr>
+<th>
+{{dp.subname}} ({{dp.subcode}}) 
+</th>
+</tr>
+</table>
+</th>
+<th style="width:6%;text-align:center;">Result</th>
+
+</tr>
+
+
+<tr style="height:130px;">
+<th style="width:1%;">SL <br/>NO</th>
+<th style="width:4%;">
+<table style="width:100%;">
+<tr style="border-bottom:1px solid black;">
+<th style="padding-bottom:15%;">
+Roll No</th>
+</tr>
+<tr ><th><br/>Reg No</th></tr>
+</table>
+</th>
+<th>Name of The<br/>
+Students</th>
+
+<th ng-repeat="dp in allres[0].dps" style="width:8%;height:130px;">  
+<table border="1" style="height:100%;width:100%;">
+<tr>
+<th>TC-<br/>{{sublist[$index].tc}}</th><th>TF-<br/>{{sublist[$index].tf}}</th>
+
+
+<th>
+<table style="width:100%;">
+<tr><th style="border-bottom:1px solid black;">Total<br/>{{dp.fullmark}}</th></tr>
+<tr><th>GP</th></tr>
+</table>
 </th>
 
-	<th ng-if="$index==0" style="text-align:center;width:5%;">Result</th>
-	</tr>
-	
-	
-	<tr ng-repeat="x in allres">
-	<td ng-if="$index==0">SL<br/>
-	NO</td>
-	<td ng-if="$index==0">
-	<b>Roll no</b> <br/>
-	<b>Reg no</b>
-</td>
-	<td ng-if="$index==0"><b>Name of</b><br/>
-	<b>the students</b></td>
 
-   <td ng-if="$index==0" style="padding-left:15px;padding-right:15px;">
-	<div class="row">
-	<div   class="col"  ng-repeat="dpk in allres[0].dps">
-		<div class="row">
-		<div class="col" style="border:1px solid black;">TC- <br/>{{sublist[$index].tc}}</div><div class="col" style="border:1px solid black;">TF- <br/>{{sublist[$index].tf}}</div>
-		<div class="col">
-			<div class="row">
-		<div class="col" style="border:1px solid black;">Total <br/>{{dpk.fullmark}}</div>
-		<div class="col" style="border:1px solid black;">GP</div>
-			</div>
-		</div>
-		</div></div>
-		</div>
-	
-		<div class="row">
-	<div   class="col"  ng-repeat="dpk in allres[0].dps">
-		<div class="row">
-		<div class="col" style="border:1px solid black;">PC- <br/>{{sublist[$index].pc}}</div><div class="col" style="border:1px solid black;">PF- <br/>{{sublist[$index].pf}}</div>
-		<div class="col">
-			<div class="row">
-		<div class="col" style="border:1px solid black;font-size:0.65em;">LETTER GRADE</div>
-			</div>
-		</div>
-		</div></div>
-		</div>
-	
-	</td>
-		<td  ng-if="$index==0"  style="width:6%;">
-	<div class="row" style="margin-left:2%;margin-right:2%;">
-	<div class="col-sm-6" style="border:1px solid black;padding-left:0px;height:89px;">
-	GPA
-<br/> 
-LETTER <br/>
-GRADE
+</tr>
+<tr>
+<th>PC-<br/>{{sublist[$index].pc}}</th><th>PF-<br/>{{sublist[$index].pf}}</th><th>LETTER<br/>GRADE</th>
+</tr>
+</table>
+</th>
+
+<th style="font-size:0.60em;height:130px;width:8%;">
+<div class="row" style="height:100%;margin-left:0.25%;margin-right:0.25%;">
+<div class="col-sm" style="border:1px solid black;">
+<div class="row" style="border:1px solid black;height:50%;padding-left:20%;padding-top:20%;">
+GPA <br/>
 </div>
-   <div class="col-sm-6" style="border:1px solid black;padding-left:0px;height:89px;"><br/>Status</div>
-	</div>
-	</td>
-	
-	</tr>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<tr ng-repeat="ps in allres">
-	<td style="text-align:center;">{{$index+fi}}</td>
-	
-	<td>
-	<b>{{ps.rst.roll}}</b> <br/> <br/>
-	<b>{{ps.rst.regno}}</b>
-	</td>
-	
-	
-	<td>
-	{{ps.rst.name}}
-	</td>
+<div class="row" style="border:1px solid black;height:50%;padding-left:20%;padding-top:10%;">
+LETTER<br/>
+GRADE<br/>
+</div>
 
-   <td style="padding-left:15px;padding-right:15px;">
-   
-	<div class="row">
-	
-	<div   class="col"  ng-repeat="dp1 in ps.dps">
-		<div class="row">
-		
-		<div class="col" style="border:0.45px solid black;height:42px;">{{dp1.tc}}</div>
-		<div class="col" style="border:0.45px solid black;height:42px;">{{dp1.tf}}</div>
-		
-		<div class="col" style="border:0.45px solid black;text-align:center;height:42px;">
-	<div style="border:0.33px solid black;padding-left:10px;height:45%;" class="row">
-	{{dp1.total}} <br/>
-	</div>	
-	<div style="border:0.30px solid black;padding-left:10px;height:55%;" class="row">
-	{{dp1.gradepoint}} <br/>
-	</div>
-	</div>
-	
-	</div>
-	</div>
-	
-	</div>
-	
-	
-		<div class="row">
-		
-	<div   class="col"  ng-repeat="dn in ps.dps">
-		<div class="row">
-		<div class="col" style="border:0.35px solid black;height:30px;">{{dn.pc}}</div>
-		<div class="col" style="border:0.35px solid black;height:30px;">{{dn.pf}}</div>
-		
-				<div class="col" style="border:0.35px solid black;height:30px;">
-				{{dn.grade}}
-		
-			</div>
-		</div></div>
-		
-		</div>
-		
-		
-	</td>
-	
-	
-	
-	
-	<td  style="width:6%;">
-	<div class="row" style="width:100%;margin-left:2%;margin-right:2%;">
-	<div class="col-sm-6" style="height:100%;border:0.35px solid black;">
-	
-<div class="row" style="height:65px;">
-<div class="col" style="border:0.35px solid black;">
-	{{ps.rst.gpa}}
-	</div>
-	
-	<div class="col" style="border:0.35px solid black;">
-	{{ps.rst.sms}} 
-	</div>
-	</div>
-	</div>
-	<div class="col-sm-6" style="border:0.35px solid black;height:65px;">
-	</div>
-	</div>
-	</td>
-	
-</tr>	
-	
+</div>
+
+<div class="col-sm" style="border:1px solid black;padding-left:20%;padding-top:35%;">
+STATUS
+</div>
+</div>
+</th>
+
+</tr>
+
+
+
+
+
+<tr style="height:130px;" ng-repeat="ps in allres">
+<th style="width:1%;">{{$index+fi}}</th>
+<th style="width:4%;">
+<table style="width:100%;">
+<tr style="border-bottom:1px solid black;">
+<th style="padding-bottom:15%;">
+{{ps.rst.roll}}</th>
+</tr>
+<tr ><th><br/>{{ps.rst.regno}}</th></tr>
+</table>
+</th>
+<th>
+{{ps.rst.name}}</th>
+
+<th ng-repeat="dp1 in ps.dps" style="width:8%;height:130px;">  
+<table border="1" style="height:100%;width:100%;">
+<tr>
+<th>TC-<br/>{{dp1.tc}}</th><th>TF-<br/>{{dp1.tf}}</th>
+
+
+<th>
+<table style="width:100%;">
+<tr><th style="border-bottom:1px solid black;">{{dp1.total}}</th></tr>
+<tr><th>{{dp1.gradepoint}}</th></tr>
+</table>
+</th>
+
+
+</tr>
+<tr>
+<th>PC-<br/>{{dp1.pc}}</th><th>PF-<br/>{{dp1.pf}}</th><th>{{dp1.grade}}</th>
+</tr>
+</table>
+</th>
+
+<th style="font-size:0.60em;height:130px;width:8%;">
+<div class="row" style="height:100%;margin-left:0.25%;margin-right:0.25%;">
+<div class="col-sm" style="border:1px solid black;">
+<div class="row" style="border:1px solid black;height:50%;padding-left:20%;padding-top:20%;">
+{{ps.rst.gpa}} <br/>
+</div>
+<div class="row" style="border:1px solid black;height:50%;padding-left:20%;padding-top:10%;">
+{{ps.rst.sms}} 
+</div>
+
+</div>
+
+<div class="col-sm" style="border:1px solid black;padding-left:20%;padding-top:35%;">
+STATUS
+</div>
+</div>
+</th>
+
+</tr>
+
+
+
+
+
+
+
+
+
+
+
 </table>
 
-</div> 
 
-		<div style="border:2px solid black;border-top:0px;margin-left:-340px;width:1500px;background-color:ghostwhite;">
-			<br/>
-	<br/>
-	
-<div class="row"  style="margin-left:50px;">
+
+
+
+
+
+
+
+
+
+
+
+
+<br/>
+<br/>
+	<div class="row"  style="margin-left:50px;">
 <div class="col">
 <b>.................................</b>
 <br/>
@@ -387,20 +369,19 @@ GRADE
 <b style="margin-left:7px;">..............................</b><br/>
 <p style="margin-left:17px;">Head of the Institute</p>
 </div>
-</div>	</div>
+</div>	
 
- 
+</div> 
 
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+		
+		
+		
+
+
+
+
+
 	
 	
 	<br/>
