@@ -186,8 +186,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <br/>
 
 
-
-
+<div style="height:70%;"> 
 <table border="1" style="font-weight:500;font-size:0.85em;">
 <tr style="height:90px;">
 <th>--</th><th>--</th><th style="width:5%;">Subject Name <br/>and Code</th>
@@ -320,25 +319,9 @@ STATUS
 </th>
 
 </tr>
-
-
-
-
-
-
-
-
-
-
-
 </table>
 
-
-
-
-
-
-
+</div>
 
 
 
@@ -348,11 +331,13 @@ STATUS
 
 <br/>
 <br/>
-	<div class="row"  style="margin-left:50px;">
+<br/>
+<br/>
+	<div class="row"  style="margin-left:50px;font-weight:500;">
 <div class="col">
 <b>.................................</b>
 <br/>
-      <p style="margin-left:35px;"> Prepared By</p>
+      <p style="margin-left:39px;"> Prepared By</p>
 </div>
 
 <div class="col">
@@ -363,11 +348,11 @@ STATUS
 
 <div class="col">
 <b style="margin-left:12px;">..................................</b><br/>
-<p style="margin-left:20px;">Head of the Department</p>
+<p style="margin-left:16px;">Head of the Department</p>
 </div>
 <div class="col">
 <b style="margin-left:7px;">..............................</b><br/>
-<p style="margin-left:17px;">Head of the Institute</p>
+<p style="margin-left:15px;">Head of the Institute</p>
 </div>
 </div>	
 
