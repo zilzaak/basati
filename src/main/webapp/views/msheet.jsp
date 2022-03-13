@@ -174,8 +174,8 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 
 <br/>
 
-<div style="height:400px;margin-left:5%;margin-right:4%;font-size:1.2em;">
-<table  align="center" border="1" style="width:100%;" >
+<div style="height:400px;margin-left:4%;margin-right:4%;font-size:1.2em;">
+<table  align="center" border="1" style="width:100.70%;" >
 <tr>
 <th>Subjects</th>
 <th>Full Marks</th>
@@ -196,14 +196,15 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
  </c:forEach> 
     </table>
         <br/>
-<span style="margin-left:73%;">Semester GPA :<b style="border:1px solid black;padding:4px;margin-left:5px;">${hp.rst.gpa}</b></span>
+     
+     <div align="right"  style="width:100.70%;" >Semester GPA :<b style="border:1px solid black;padding:4px;margin-left:5px;">${hp.rst.gpa}</b></div>
 </div>
 
 <br/>
 
 
 
- <div class="row" style="margin-top:100px;padding-left:30px;">
+ <div class="row" style="margin-top:100px;padding-left:30px;width:100%;">
       <div class="col-md-4">
         <b>....................</b><br/>
     <b>Dept. Head</b>
@@ -212,7 +213,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
     <b>........................</b><br/>
     <b style="padding-right:10px;">Compared By</b>
     </div>
-       <div class="col-md-4" align="right" style="padding-right:65px;">
+       <div class="col-md-4" align="right" style="padding-right:25px;">
     <b>...............</b><br/>
     <b>Principal</b>
     </div>
@@ -220,7 +221,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
   
 
      
-     <div  style="font-size:0.85em; margin-left:30px;margin-bottom:20px;margin-top:4px;">
+     <div  style="font-size:0.85em; margin-left:30px;margin-bottom:20px;margin-top:4pxwidth:100%;">
     <b>Date of issue:-${hp.dps[0].issue}</b> <br/>
     <b>Date of Publication of Result:-${hp.dps[0].pub}</b>
     </div>
