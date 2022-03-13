@@ -546,7 +546,7 @@ if(b.getSession().contentEquals(p.getSession()) && b.getDept().contentEquals(p.g
 	@PostMapping("/findresult")
 	public ResponseEntity<Helperr> findresult(@RequestBody Department dp,HttpSession session){
 
-List<Department> lst = drr.findByDeptAndSemesterAndRollno(dp.getDept(),dp.getSemester(),dp.getRollno());
+List<Department> lst = drr.findBySessionAndDeptAndSemesterAndRollno(dp.getSession(),dp.getDept(),dp.getSemester(),dp.getRollno());
 
 float totalpoint=0;float totalcredit=0;
 float gpa=0; 
