@@ -67,8 +67,9 @@ module.controller("ar",function($scope,$http){
 	
 	$scope.limitshow=function(){
 		$scope.allres=[];
-		    if(($scope.ti-$scope.fi)<10){
+		    if(($scope.ti-$scope.fi)<7){
 		    	angular.forEach($scope.allr,function(v,k){
+		 
 		    		i=k+1;
 		    		if($scope.fi<=i && i<=$scope.ti ){
 		    		
@@ -78,9 +79,9 @@ module.controller("ar",function($scope,$http){
 		    	
 		    }
 
-		    if(($scope.ti-$scope.fi)>=10){
+		    if(($scope.ti-$scope.fi)>=7){
 
-		    	alert("please select maximum 10 records");
+		    	alert("please select maximum 6 records");
 		    }	    
 		    
 		
@@ -188,7 +189,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 
 <div style="height:70%;"> 
 <table border="1" style="font-weight:500;font-size:0.85em;">
-<tr style="height:90px;">
+<tr style="height:105px;">
 <th>--</th><th>--</th><th style="width:5%;">Subject Name <br/>and Code</th>
 
 <th ng-repeat="dp in allres[0].dps" style="width:10%;">  
@@ -205,7 +206,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 </tr>
 
 
-<tr style="height:130px;">
+<tr style="height:105px;">
 <th style="width:1%;">SL <br/>NO</th>
 <th style="width:4%;">
 <table style="width:100%;">
@@ -219,11 +220,10 @@ Roll No</th>
 <th>Name of The<br/>
 Students</th>
 
-<th ng-repeat="dp in allres[0].dps" style="width:8%;height:130px;">  
+<th ng-repeat="dp in allres[0].dps" style="width:8%;height:105px;">  
 <table border="1" style="height:100%;width:100%;">
 <tr>
 <th style="width:31%;">TC-<br/>{{sublist[$index].tc}}</th><th style="width:31%;">TF-<br/>{{sublist[$index].tf}}</th>
-
 
 <th>
 <table style="width:100%;">
@@ -240,7 +240,7 @@ Students</th>
 </table>
 </th>
 
-<th style="height:130px;width:8%;">
+<th style="height:105px;width:8%;">
 <div class="row" style="height:100%;margin-left:0.25%;margin-right:0.25%;">
 <div class="col-sm-6" style="border:1px solid black;">
 <div class="row" style="border:1px solid black;height:50%;padding-left:20%;padding-top:20%;">
@@ -252,20 +252,18 @@ GRADE<br/>
 </div>
 
 </div>
-
 <div class="col-sm-6" style="border:1px solid black;font-size:0.70em;padding-top:35%;">
 STATUS
 </div>
 </div>
 </th>
-
 </tr>
 
 
 
 
 
-<tr style="height:130px;" ng-repeat="ps in allres">
+<tr style="height:105px;" ng-repeat="ps in allres">
 <th style="width:1%;">{{$index+fi}}</th>
 <th style="width:4%;">
 <table style="width:100%;">
@@ -279,12 +277,10 @@ STATUS
 <th>
 {{ps.rst.name}}</th>
 
-<th ng-repeat="dp1 in ps.dps" style="width:8%;height:130px;">  
+<th ng-repeat="dp1 in ps.dps" style="width:8%;height:105px;">  
 <table border="1" style="height:100%;width:100%;">
 <tr>
-<th style="width:31%;">TC-<br/>{{dp1.tc}}</th><th style="width:31%;">TF-<br/>{{dp1.tf}}</th>
-
-
+<th style="width:31%;">{{dp1.tc}}</th><th style="width:31%;">{{dp1.tf}}</th>
 <th>
 <table style="width:100%;">
 <tr><th style="border-bottom:1px solid black;">{{dp1.total}}</th></tr>
@@ -292,28 +288,25 @@ STATUS
 </table>
 </th>
 
-
 </tr>
+
 <tr>
-<th style="width:31%;">PC-<br/>{{dp1.pc}}</th><th style="width:31%;">PF-<br/>{{dp1.pf}}</th><th>{{dp1.grade}}</th>
+<th style="width:31%;">{{dp1.pc}}</th><th style="width:31%;">{{dp1.pf}}</th><th>{{dp1.grade}}</th>
 </tr>
 </table>
 </th>
 
-<th style="height:130px;width:8%;">
+<th style="height:105px;width:8%;">
 <div class="row" style="height:100%;margin-left:0.25%;margin-right:0.25%;">
 <div class="col-sm-6" style="border:1px solid black;">
-<div class="row" style="border:1px solid black;height:68px;padding-left:20%;padding-top:20%;">
+<div class="row" style="border:1px solid black;height:68%;padding-left:20%;padding-top:20%;">
 {{ps.rst.gpa}} <br/>
 </div>
-<div class="row" style="border:1px solid black;height:62px;padding-left:20%;padding-top:10%;">
+<div class="row" style="border:1px solid black;height:32%;padding-left:20%;padding-top:10%;">
 {{ps.rst.sms}} 
 </div>
-
 </div>
-
 <div class="col-sm-6" style="border:1px solid black;padding-top:35%;">
-
 </div>
 </div>
 </th>
