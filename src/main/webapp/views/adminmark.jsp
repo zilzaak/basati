@@ -125,7 +125,7 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 <th>rollno</th>
 </tr>
 <tr>
-<td><select  ng-model="p3.session" ng-options="c for c in khan2"></select></td>
+<td><select  ng-model="p3.session" ng-options="c for c in sch"></select></td>
 <td><select  ng-model="p3.dept" ng-options="c for c in khan2"></select></td>
 <td><select  ng-model="p3.semester" ng-options="d for d in khan1"></select></td>
 <td><input type="text"  ng-model="p3.rollno" /></td>
