@@ -172,7 +172,15 @@ if(session.getAttribute("user")==null && session.getAttribute("password")==null)
 	<td>{{x.name}}</td>
 	<td>{{x.roll}}</td>
 	<td>{{x.regno}}</td>
-	<td>{{x.gpa}}</td>
+	<td ng-if="x.gpa!=0">
+	
+	{{x.gpa}}
+	
+	</td>
+		<td ng-if="x.gpa==0">
+	referred
+	</td>
+	
 	</tr>
 	
 	</table>
