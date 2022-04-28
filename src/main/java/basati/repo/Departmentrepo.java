@@ -63,6 +63,9 @@ public interface Departmentrepo extends JpaRepository<Department,Integer> {
 	public List<Department> findBySessionAndDeptAndSemesterAndRollnoAndRegno(String session, String dept,
 			String semester, String rollno, String regno);
 	
+		public List<Department> findBySessionAndDeptAndSemesterAndRollnoOrderBySubcodeAsc(String session, String dept,
+			String semester, String rollno);
+	
 	
 	
 }
