@@ -115,7 +115,7 @@ rs.setDept(dp.getDept()); rs.setName(dp.getStudentname());
 	for(Department d : dlst2) {
 			Helperr h = new Helperr();
 			h.setRst(findresult(d));
-			h.setDps(drr.findBySessionAndDeptAndSemesterAndRollno(d.getSession(),d.getDept(),d.getSemester(),d.getRollno()));		
+			h.setDps(drr.findBySessionAndDeptAndSemesterAndRollnoOrderBySubcodeAsc(d.getSession(),d.getDept(),d.getSemester(),d.getRollno()));		
 			helplst.add(h);
 		}
 		
